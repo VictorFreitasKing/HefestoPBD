@@ -1,7 +1,7 @@
-from ..entidades import veiculos
+from ..entidades import etapa_servico
 from ..database import db
 
-nome_tabela = "veiculos"
+nome_tabela = "etapa_servico"
 
 def criar_tabela():
     #Montando comando SQL
@@ -9,10 +9,8 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "placa varchar(11)," \
-                "marca varchar(11)," \
-                "modelo varchar(15)," \
-                "codigoChefe INTEGER references chefes(codigo) UNIQUE"
+                "descricao varchar(30)," \
+                "codigoServico INTEGER references servicos(codigo) UNIQUE"
     comandoSQL += ");"
 
 
@@ -21,20 +19,16 @@ def criar_tabela():
     db.commit()
     cursor.close()
 
-def cadastrar(veiculos):
+def cadastrar(etapa_servico):
     #Montando comando SQL
     comandoSQL = "insert into "
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigoChefe," \
-                "placa," \
-                "marca," \
-                "modelo" 
+                "descricao"
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(veiculos.codigoChefe)+"'," \
-                "'" + str(veiculos.placa) + "'," \
-                "'" + str(veiculos.marca) + "'," \
-                "'"+str(veiculos.modelo)+"'"
+    comandoSQL += "'"+str(etapa_servico.codigoChefe)+"'," \
+                "'"+str(etapa_servico.descricao)+"'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -43,17 +37,15 @@ def cadastrar(veiculos):
     db.commit()
     cursor.close()
 
-    return veiculos
+    return etapa_servico
 
-def editar(codigo, veiculos):
+def editar(codigo, servicos):
     #Montando comando SQL
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL += "marca = '"+ str(veiculos.marca) +"', " \
-                "codigoChefe = '"+str(veiculos.codigoChefe)+"'," \
-                "placa = '" + str(veiculos.placa) + "'," \
-                "modelo = '"+str(veiculos.modelo)+"'"
+    comandoSQL += "descricao = '"+ str(etapa_servico.descricao) +"', " \
+                "codigoServico = '"+str(etapa_servico.codigoServico)+"',"
     comandoSQL += " where codigo='"+str(codigo)+"';"
 
     #Executando comando no banco de dados
@@ -61,7 +53,7 @@ def editar(codigo, veiculos):
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
-    return veiculos
+    return servicos
 
 def getAll():
     comandoSQL = "SELECT * FROM "+nome_tabela+";"
@@ -72,7 +64,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(veiculos.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4]))
+        lista.append(etapa_servico.etapa_servico(codigo=data_manager[0], codigoChefe=data_manager[1], descricao=data_manager[2]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -83,7 +75,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return veiculos.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
+        return etapa_servico.etapa_servico(codigo=data_manager[0], codigoChefe=data_manager[1], descricao=data_manager[2])
     else:
         return None
 
@@ -93,6 +85,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return veiculos.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
+        return etapa_servico.etapa_servico(codigo=data_manager[0], codigoChefe=data_manager[1], descricao=data_manager[2])
     else:
         return None

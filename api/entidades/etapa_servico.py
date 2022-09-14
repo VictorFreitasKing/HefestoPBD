@@ -1,6 +1,7 @@
-class servico():
-    def __init__(self,descricao, codigo=0):
+class Veiculo():
+    def __init__(self, codigoServico, descricao, codigo=0):
         self.__codigo = codigo
+        self.__codigoServico = codigoServico
         self.__descricao = descricao
 
     @property
@@ -8,15 +9,21 @@ class servico():
         return self.__codigo
 
     @property
+    def codigoServico(self):
+        return self.__codigoServico
+
+    @property
     def descricao(self):
         return self.__descricao
 
     @descricao.setter
-    def descricao(self, descricao):
+    def placa(self, descricao):
         self.__descricao = descricao
+
 
     def toJson(self):
         return dict(
             codigo = self.__codigo,
-            descricao = self.__descricao
+            codigoChefe = self.__codigoServico,
+            modelo = self.__descricao
         )

@@ -1,7 +1,7 @@
-from ..entidades import veiculos
+from ..entidades import solicitacao_reboque
 from ..database import db
 
-nome_tabela = "veiculos"
+nome_tabela = "solicitacao_reboque"
 
 def criar_tabela():
     #Montando comando SQL
@@ -9,10 +9,9 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "placa varchar(11)," \
-                "marca varchar(11)," \
-                "modelo varchar(15)," \
-                "codigoChefe INTEGER references chefes(codigo) UNIQUE"
+                "placa latitude(11)," \
+                "marca longitude(11)," \
+                "codigoCliente INTEGER references clientes(codigo) UNIQUE"
     comandoSQL += ");"
 
 
@@ -21,20 +20,18 @@ def criar_tabela():
     db.commit()
     cursor.close()
 
-def cadastrar(veiculos):
+def cadastrar(solicitacao_reboque):
     #Montando comando SQL
     comandoSQL = "insert into "
     comandoSQL += nome_tabela
     comandoSQL += "("
-    comandoSQL += "codigoChefe," \
-                "placa," \
-                "marca," \
-                "modelo" 
+    comandoSQL += "codigoCliente," \
+                "longitude," \
+                "latitude,"
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(veiculos.codigoChefe)+"'," \
-                "'" + str(veiculos.placa) + "'," \
-                "'" + str(veiculos.marca) + "'," \
-                "'"+str(veiculos.modelo)+"'"
+    comandoSQL += "'"+str(solicitacao_reboque.codigoCliente)+"'," \
+                "'" + str(solicitacao_reboque.longitude) + "'," \
+                "'"+str(solicitacao_reboque.latitude)+"'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -43,17 +40,16 @@ def cadastrar(veiculos):
     db.commit()
     cursor.close()
 
-    return veiculos
+    return solicitacao_reboque
 
-def editar(codigo, veiculos):
+def editar(codigo, solicitacao_reboque):
     #Montando comando SQL
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL += "marca = '"+ str(veiculos.marca) +"', " \
-                "codigoChefe = '"+str(veiculos.codigoChefe)+"'," \
-                "placa = '" + str(veiculos.placa) + "'," \
-                "modelo = '"+str(veiculos.modelo)+"'"
+    comandoSQL += "latitude = '"+ str(solicitacao_reboque.latitude) +"', " \
+                "codigoChefe = '"+str(solicitacao_reboque.codigoCliente)+"'," \
+                "placa = '" + str(solicitacao_reboque.longitude) + "',"
     comandoSQL += " where codigo='"+str(codigo)+"';"
 
     #Executando comando no banco de dados
@@ -61,7 +57,7 @@ def editar(codigo, veiculos):
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
-    return veiculos
+    return solicitacao_reboque
 
 def getAll():
     comandoSQL = "SELECT * FROM "+nome_tabela+";"
@@ -72,7 +68,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(veiculos.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4]))
+        lista.append(solicitacao_reboque.solicitacao_reboque(codigo=data_manager[0], codigoCliente=data_manager[1], latitude=data_manager[2], longitude=data_manager[3]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -83,7 +79,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return veiculos.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
+        return solicitacao_reboque.solicitacao_reboque(codigo=data_manager[0], codigoCliente=data_manager[1], latitude=data_manager[2], longitude=data_manager[3])
     else:
         return None
 
@@ -93,6 +89,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return veiculos.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
+        return solicitacao_reboque.solicitacao_reboque(codigo=data_manager[0], codigoCliente=data_manager[1], latitude=data_manager[2], longitude=data_manager[3])
     else:
         return None
