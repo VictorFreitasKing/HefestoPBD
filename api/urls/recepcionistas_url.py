@@ -1,4 +1,4 @@
-from ..entidades import recepcionistas
+from ..entidades import recepcionista
 from ..views import recepcionistas_view
 from flask import request, Blueprint, make_response
 from api import app
@@ -10,7 +10,7 @@ def url_geral_recepcionistas():
     if (request.method == "GET"):
         return recepcionistas_view.recepcionistas_view().getAll()
     if (request.method == "POST"):
-        recepcionistasTemp = recepcionistas.recepcionistas(
+        recepcionistasTemp = recepcionista.recepcionistas(
             matriculaFuncionario=request.json["matriculaFuncionario"],
         )
 
@@ -22,7 +22,7 @@ def url_unico_recepcionistas(id):
     if request.method == 'GET':
         return recepcionistas_view.recepcionistas_view().get(id)
     if request.method == 'POST':
-        recepcionistasTemp = recepcionistas.recepcionistas(
+        recepcionistasTemp = recepcionista.recepcionistas(
             codigo=id,
             matriculaFuncionario=request.json["matriculaFuncionario"],
         )

@@ -1,4 +1,4 @@
-from ..entidades import titulos
+from ..entidades import titulo
 from ..database import db
 
 nome_tabela = "titulos"
@@ -76,7 +76,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(titulos.titulos(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5]))
+        lista.append(titulo.titulos(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -87,7 +87,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return titulos.titulos(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5])
+        return titulo.titulos(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5])
     else:
         return None
 
@@ -97,6 +97,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return titulos.titulos(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5])
+        return titulo.titulos(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5])
     else:
         return None

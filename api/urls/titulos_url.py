@@ -1,4 +1,4 @@
-from ..entidades import titulos
+from ..entidades import titulo
 from ..views import titulos_view
 from flask import request, Blueprint, make_response
 from api import app
@@ -10,7 +10,7 @@ def url_geral_titulos():
     if (request.method == "GET"):
         return titulos_view.titulos_view().getAll()
     if (request.method == "POST"):
-        titulosTemp = titulos.titulos(
+        titulosTemp = titulo.titulos(
             valor=request.json["valor"],
             vencimento=request.json["vencimento"],
             data_baixa=request.json["data_baixa"]
@@ -24,7 +24,7 @@ def url_unico_titulos(id):
     if request.method == 'GET':
         return titulos_view.titulos_view().get(id)
     if request.method == 'POST':
-        titulosTemp = titulos.titulos(
+        titulosTemp = titulo.titulos(
             codigo=id,
             valor=request.json["valor"],
             vencimento=request.json["vencimento"],

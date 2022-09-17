@@ -1,8 +1,8 @@
+#Produto = PEça no ER
 class Produto():
     def __init__(self, descricao, codigo=0):
         self.__codigo = codigo
         self.__descricao = descricao
-#peça no ER, referenciamos como produto por ser mais condizendo com notas fiscais n tenho nem ideia de como fazer isso kkkkkk
 
     @property
     def codigo(self):

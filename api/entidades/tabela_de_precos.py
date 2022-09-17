@@ -27,7 +27,7 @@ class Tabela_de_preco():
         return self.__inicio
 
     @inicio.setter
-    def marca(self, inicio):
+    def inicio(self, inicio):
         self.__inicio = inicio
 
     @property
@@ -41,8 +41,8 @@ class Tabela_de_preco():
     def toJson(self):
         return dict(
             codigo = self.__codigo,
-            codigoChefe = self.__codigoServico,
-            placa = self.__preco,
-            marca = self.__inicio,
-            modelo = self.__fim
+            codigoServico = self.__codigoServico,
+            preco = self.__preco,
+            inicio = self.__inicio,
+            fim = self.__fim
         )

@@ -1,4 +1,4 @@
-from ..entidades import itens_NF
+from ..entidades import item_NF
 from ..views import itens_NF_view
 from flask import request, Blueprint, make_response
 from api import app
@@ -10,7 +10,7 @@ def url_geral_itens_NF():
     if (request.method == "GET"):
         return itens_NF_view.itens_NF_view().getAll()
     if (request.method == "POST"):
-        itens_NFTemp = itens_NF.itens_NF(
+        itens_NFTemp = item_NF.itens_NF(
             quantidade=request.json["quantidade"],
             preco=request.json["preco"]
         )
@@ -23,7 +23,7 @@ def url_unico_itens_NF(id):
     if request.method == 'GET':
         return itens_NF_view.itens_NF_view().get(id)
     if request.method == 'POST':
-        itens_NFTemp = itens_NF.itens_NF(
+        itens_NFTemp = item_NF.itens_NF(
             codigo=id,
             quantidade=request.json["quantidade"],
             preco=request.json["preco"]

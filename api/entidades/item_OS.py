@@ -1,4 +1,4 @@
-class Veiculo():
+class Item_OS():
     def __init__(self, codigoOS, codigoServico, codigoMecanico, preco, status, codigo=0):
         self.__codigo = codigo
         self.__codigoOS = codigoOS

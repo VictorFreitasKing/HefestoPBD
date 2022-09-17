@@ -1,4 +1,4 @@
-from ..entidades import veiculos
+from ..entidades import veiculo
 from ..views import veiculos_view
 from flask import request, Blueprint, make_response
 from api import app
@@ -10,7 +10,7 @@ def url_geral_veiculos():
     if (request.method == "GET"):
         return veiculos_view.veiculos_view().getAll()
     if (request.method == "POST"):
-        veiculosTemp = veiculos.veiculos(
+        veiculosTemp = veiculo.veiculos(
             placa=request.json["placa"],
             marca=request.json["marca"],
             modelo=request.json["modelo"]
@@ -24,7 +24,7 @@ def url_unico_veiculos(id):
     if request.method == 'GET':
         return veiculos_view.veiculos_view().get(id)
     if request.method == 'POST':
-        veiculosTemp = veiculos.veiculos(
+        veiculosTemp = veiculo.veiculos(
             codigo=id,
             placa=request.json["placa"],
             marca=request.json["marca"],

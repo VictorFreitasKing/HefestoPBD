@@ -1,4 +1,4 @@
-from ..entidades import veiculos
+from ..entidades import veiculo
 from ..database import db
 
 nome_tabela = "veiculos"
@@ -72,7 +72,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(veiculos.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4]))
+        lista.append(veiculo.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -83,7 +83,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return veiculos.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
+        return veiculo.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
     else:
         return None
 
@@ -93,6 +93,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return veiculos.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
+        return veiculo.veiculos(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
     else:
         return None

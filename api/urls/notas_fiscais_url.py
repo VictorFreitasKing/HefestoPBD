@@ -1,4 +1,4 @@
-from ..entidades import notas_fiscais
+from ..entidades import nota_fiscal
 from ..views import notas_fiscais_view
 from flask import request, Blueprint, make_response
 from api import app
@@ -10,7 +10,7 @@ def url_geral_notas_fiscais():
     if (request.method == "GET"):
         return notas_fiscais_view.notas_fiscais_view().getAll()
     if (request.method == "POST"):
-        notas_fiscaisTemp = notas_fiscais.notas_fiscais(
+        notas_fiscaisTemp = nota_fiscal.notas_fiscais(
             total=request.json["total"]
         )
 
@@ -22,7 +22,7 @@ def url_unico_notas_fiscais(id):
     if request.method == 'GET':
         return notas_fiscais_view.notas_fiscais_view().get(id)
     if request.method == 'POST':
-        notas_fiscaisTemp = notas_fiscais.notas_fiscais(
+        notas_fiscaisTemp = nota_fiscal.notas_fiscais(
             codigo=id,
             total=request.json["total"],
             numero=request.json["numero"],

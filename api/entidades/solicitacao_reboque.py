@@ -3,6 +3,7 @@ class Solicitacao_reboque():
         self.__codigo = codigo
         self.__codigoCliente = codigoCliente
         self.__latitude = latitude
+        self.__longitude = longitude
 
     @property
     def codigo(self):
@@ -25,14 +26,14 @@ class Solicitacao_reboque():
         return self.__longitude
 
     @longitude.setter
-    def marca(self, longitude):
+    def longitude(self, longitude):
         self.__longitude = longitude
 
 
     def toJson(self):
         return dict(
             codigo = self.__codigo,
-            codigoChefe = self.__codigoCliente,
-            placa = self.__latitude,
-            marca = self.__longitude
+            codigoCliente = self.__codigoCliente,
+            latitude = self.__latitude,
+            longitude = self.__longitude
         )

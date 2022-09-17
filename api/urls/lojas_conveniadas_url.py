@@ -1,4 +1,4 @@
-from ..entidades import lojas_conveniadas
+from ..entidades import loja_conveniada
 from ..views import lojas_conveniadas_view
 from flask import request, Blueprint, make_response, render_template
 from api import app
@@ -10,7 +10,7 @@ def url_geral_lojas_conveniadas():
     if (request.method == "GET"):
         return lojas_conveniadas_view.lojas_conveniadas_view().getAll()
     if (request.method == "POST"):
-        lojas_conveniadasTemp = lojas_conveniadas.Lojas_Conveniadas(
+        lojas_conveniadasTemp = loja_conveniada.Lojas_Conveniadas(
             cnpj=request.json["cnpj"],
             razao_social=request.json["razao_social"],
             IE=request.json["IE"],
@@ -29,7 +29,7 @@ def url_unico_lojas_conveniadas(id):
     if request.method == 'GET':
         return lojas_conveniadas_view.lojas_conveniadas_view().get(id)
     if request.method == 'POST':
-        lojas_conveniadasTemp = lojas_conveniadas.Lojas_Conveniadas(
+        lojas_conveniadasTemp = loja_conveniada.Lojas_Conveniadas(
             codigo=id,
             cnpj=request.json["cnpj"],
             razao_social=request.json["razao_social"],

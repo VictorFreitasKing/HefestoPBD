@@ -1,4 +1,4 @@
-class ordem_servico():
+class Ordem_Servico():
     def __init__(self, codigoMecanico, codigoVeiculo, entrada, saida, total, codigo=0):
         self.__codigo = codigo
         self.__codigoMecanico = codigoMecanico
@@ -23,6 +23,10 @@ class ordem_servico():
     def entrada(self):
         return self.__entrada
 
+    @entrada.setter
+    def entrada(self, entrada):
+        self.__entrada = entrada
+
     @property
     def saida(self):
         return self.__saida
@@ -44,7 +48,7 @@ class ordem_servico():
             codigo = self.__codigo,
             codigoChefe = self.__codigoMecanico,
             codigoVeiculo = self.__codigoVeiculo,
-            placa = self.__entrada,
-            marca = self.__saida,
-            modelo = self.__total
+            entrada = self.__entrada,
+            saida = self.__saida,
+            total = self.__total
         )

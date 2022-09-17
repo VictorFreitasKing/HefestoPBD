@@ -1,4 +1,4 @@
-from ..entidades import servicos
+from ..entidades import servico
 from ..database import db
 
 nome_tabela = "servicos"
@@ -9,7 +9,7 @@ def criar_tabela():
    comandoSQL += nome_tabela
    comandoSQL += "("
    comandoSQL += "codigo serial primary key," \
-               "placa varchar(255)," \
+               "placa varchar(255)" \
 
    comandoSQL += ");"
 
@@ -61,7 +61,7 @@ def getAll():
    if data_manager is None:
        return None
    while data_manager is not None:
-       lista.append(servicos.servicos(codigo=data_manager[0], descricao=data_manager[1]))
+       lista.append(servico.servicos(codigo=data_manager[0], descricao=data_manager[1]))
        data_manager = cursor.fetchone()
 
    return lista
@@ -72,7 +72,7 @@ def get(id):
    cursor.execute(comandoSQL)
    data_manager = cursor.fetchone()
    if data_manager:
-       return servicos.servicos(codigo=data_manager[0], descricao=data_manager[1])
+       return servico.servicos(codigo=data_manager[0], descricao=data_manager[1])
    else:
        return None
 
@@ -82,6 +82,6 @@ def get_ultimo():
    cursor.execute(comandoSQL)
    data_manager = cursor.fetchone()
    if data_manager:
-       return servicos.servicos(codigo=data_manager[0], descricao=data_manager[1])
+       return servico.servicos(codigo=data_manager[0], descricao=data_manager[1])
    else:
        return None

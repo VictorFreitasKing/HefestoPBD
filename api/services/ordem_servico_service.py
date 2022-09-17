@@ -12,7 +12,7 @@ def criar_tabela():
                 "entrada varchar(10)," \
                 "saida varchar(10)," \
                 "total varchar(15)," \
-                "codigoMecanico INTEGER references mecanicos(codigo) UNIQUE"\
+                "codigoMecanico INTEGER references mecanicos(codigo) UNIQUE,"\
                 "codigoVeiculos INTEGER references veiculos(codigo) UNIQUE"
     comandoSQL += ");"
 
@@ -36,7 +36,7 @@ def cadastrar(ordem_servicos):
     comandoSQL += "'"+str(ordem_servicos.codigoMecanico)+"'," \
                 "'" + str(ordem_servicos.codigoVeiculo) + "'," \
                 "'" + str(ordem_servicos.entrada) + "'," \
-                "'" + str(ordem_servicos.saida) + "',"\             
+                "'" + str(ordem_servicos.saida) + "'," \
                 "'"+str(ordem_servicos.total)+"'"
     comandoSQL += ");"
 

@@ -1,4 +1,4 @@
-from ..entidades import oficinas
+from ..entidades import oficina
 from ..views import oficinas_view
 from flask import request, Blueprint, make_response, render_template
 from api import app
@@ -10,7 +10,7 @@ def url_geral_oficinas():
     if (request.method == "GET"):
         return oficinas_view.oficinas_view().getAll()
     if (request.method == "POST"):
-        oficinasTemp = oficinas.oficinas(
+        oficinasTemp = oficina.oficinas(
             cnpj=request.json["cnpj"],
             razao_social=request.json["razao_social"],
             IE=request.json["IE"],
@@ -30,7 +30,7 @@ def url_unico_oficinas(id):
     if request.method == 'GET':
         return oficinas_view.oficinas_view().get(id)
     if request.method == 'POST':
-        oficinasTemp = oficinas.oficinas(
+        oficinasTemp = oficina.oficinas(
             codigo=id,
             cnpj=request.json["cnpj"],
             razao_social=request.json["razao_social"],

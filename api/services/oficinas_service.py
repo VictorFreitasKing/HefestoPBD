@@ -1,4 +1,4 @@
-from ..entidades import oficinas
+from ..entidades import oficina
 from ..database import db
 
 nome_tabela = "oficinas"
@@ -43,15 +43,15 @@ def cadastrar(oficina):
                 "logradouro," \
                 "codigoChefe"
     comandoSQL +=") values ("
-    comandoSQL +="'"+str(oficinas.cnpj)+"'," \
-                "'"+str(oficinas.razao_social)+"'," \
-                "'"+str(oficinas.IE)+"'," \
-                "'"+str(oficinas.pais)+"'," \
-                "'"+str(oficinas.estado)+"'," \
-                "'"+str(oficinas.cidade)+"'," \
-                "'"+str(oficinas.bairro)+"'," \
-                "'"+str(oficinas.logradouro)+"'," \
-                "'"+str(oficinas.codigoChefe)+"'"
+    comandoSQL +="'" + str(oficina.cnpj) + "'," \
+                "'" + str(oficina.razao_social) + "'," \
+                "'" + str(oficina.IE) + "'," \
+                "'" + str(oficina.pais) + "'," \
+                "'" + str(oficina.estado) + "'," \
+                "'" + str(oficina.cidade) + "'," \
+                "'" + str(oficina.bairro) + "'," \
+                "'" + str(oficina.logradouro) + "'," \
+                "'" + str(oficina.codigoChefe) + "'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -60,7 +60,7 @@ def cadastrar(oficina):
     db.commit()
     cursor.close()
 
-    return oficinas
+    return oficina
 
 def editar(codigo, oficinas):
     #Montando comando SQL
@@ -94,7 +94,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(oficinas.Oficinas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5],cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8], codigoChefe=data_manager[9]))
+        lista.append(oficina.Oficinas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5], cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8], codigoChefe=data_manager[9]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -105,7 +105,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return oficinas.Oficinas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5],cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8], codigoChefe=data_manager[9])
+        return oficina.Oficinas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5], cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8], codigoChefe=data_manager[9])
     else:
         return None
 
@@ -115,6 +115,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return oficinas.Oficinas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5],cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8], codigoChefe=data_manager[9])
+        return oficina.Oficinas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5], cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8], codigoChefe=data_manager[9])
     else:
         return None

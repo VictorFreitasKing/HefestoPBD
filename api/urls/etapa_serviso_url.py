@@ -1,4 +1,4 @@
-from ..entidades import servicos
+from ..entidades import servico
 from ..views import servicos_view
 from flask import request, Blueprint, make_response
 from api import app
@@ -10,7 +10,7 @@ def url_geral_etapa_servico():
     if (request.method == "GET"):
         return servicos_view.servicos_view().getAll()
     if (request.method == "POST"):
-        servicosTemp = servicos.servicos(
+        servicosTemp = servico.servicos(
             descricao=request.json["descricao"]
         )
 
@@ -22,7 +22,7 @@ def url_unico_etapa_servico(id):
     if request.method == 'GET':
         return servicos_view.servicos_view().get(id)
     if request.method == 'POST':
-        servicosTemp = servicos.servicos(
+        servicosTemp = servico.servicos(
             codigo=id,
             descricao=request.json["descricao"]
         )

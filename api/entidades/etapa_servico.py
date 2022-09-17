@@ -1,4 +1,4 @@
-class Veiculo():
+class Etapa_Servico():
     def __init__(self, codigoServico, descricao, codigo=0):
         self.__codigo = codigo
         self.__codigoServico = codigoServico
@@ -17,13 +17,12 @@ class Veiculo():
         return self.__descricao
 
     @descricao.setter
-    def placa(self, descricao):
+    def descricao(self, descricao):
         self.__descricao = descricao
-
 
     def toJson(self):
         return dict(
             codigo = self.__codigo,
-            codigoChefe = self.__codigoServico,
-            modelo = self.__descricao
+            codigoServico = self.__codigoServico,
+            descricao = self.__descricao
         )

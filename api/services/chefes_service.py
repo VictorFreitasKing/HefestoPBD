@@ -1,4 +1,4 @@
-from ..entidades import chefes
+from ..entidades import chefe
 from ..database import db
 
 nome_tabela = "chefes"
@@ -61,7 +61,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(chefes.chefe(codigo=data_manager[0], matriculaFuncionario=data_manager[1]))
+        lista.append(chefe.chefe(codigo=data_manager[0], matriculaFuncionario=data_manager[1]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -72,7 +72,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return chefes.chefe(codigo=data_manager[0], matriculaFuncionario=data_manager[1])
+        return chefe.chefe(codigo=data_manager[0], matriculaFuncionario=data_manager[1])
     else:
         return None
 
@@ -82,6 +82,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return chefes.chefe(codigo=data_manager[0], matriculaFuncionario=data_manager[1])
+        return chefe.chefe(codigo=data_manager[0], matriculaFuncionario=data_manager[1])
     else:
         return None

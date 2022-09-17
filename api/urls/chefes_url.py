@@ -1,4 +1,4 @@
-from ..entidades import chefes
+from ..entidades import chefe
 from ..views import chefes_view
 from flask import request, Blueprint, make_response
 from api import app
@@ -10,7 +10,7 @@ def url_geral_chefes():
     if (request.method == "GET"):
         return chefes_view.chefes_view().getAll()
     if (request.method == "POST"):
-        chefesTemp = chefes.chefes(
+        chefesTemp = chefe.chefes(
             matriculaFuncionario=request.json["matriculaFuncionario"],
         )
 
@@ -22,7 +22,7 @@ def url_unico_chefes(id):
     if request.method == 'GET':
         return chefes_view.chefes_view().get(id)
     if request.method == 'POST':
-        chefesTemp = chefes.chefes(
+        chefesTemp = chefe.chefes(
             codigo=id,
             matriculaFuncionario=request.json["matriculaFuncionario"],
         )

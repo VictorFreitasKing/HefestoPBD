@@ -9,8 +9,8 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "placa latitude(11)," \
-                "marca longitude(11)," \
+                "latitude varchar(11)," \
+                "longitude varchar(11)," \
                 "codigoCliente INTEGER references clientes(codigo) UNIQUE"
     comandoSQL += ");"
 

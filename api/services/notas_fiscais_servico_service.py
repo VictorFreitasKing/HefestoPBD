@@ -1,4 +1,4 @@
-from ..entidades import notas_fiscais_servico
+from ..entidades import nota_fiscal_servico
 from ..database import db
 
 nome_tabela = "notas_fiscais_servico"
@@ -9,8 +9,8 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "data_emissao varchar(10)," \
-                "total varchar(15)," \
+                  "data_emissao varchar(10)," \
+                  "total varchar(15)," \
                   "codigoFaturista INTEGER references faturistas(codigo) UNIQUE" \
                   "codigoOS INTEGER references ordem_servico(codigo) UNIQUE"
     comandoSQL += ");"
@@ -72,7 +72,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(notas_fiscais_servico.notas_fiscais_servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4]))
+        lista.append(nota_fiscal_servico.notas_fiscais_servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -83,7 +83,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return notas_fiscais_servico.notas_fiscais_servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4])
+        return nota_fiscal_servico.notas_fiscais_servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4])
     else:
         return None
 
@@ -93,6 +93,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return notas_fiscais_servico.notas_fiscais_servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4])
+        return nota_fiscal_servico.notas_fiscais_servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4])
     else:
         return None

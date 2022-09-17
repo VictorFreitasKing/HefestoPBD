@@ -1,4 +1,4 @@
-from ..entidades import lojas_conveniadas
+from ..entidades import loja_conveniada
 from ..database import db
 
 nome_tabela = "lojas_conveniadas"
@@ -41,14 +41,14 @@ def cadastrar(oficina):
                 "bairro," \
                 "logradouro"
     comandoSQL +=") values ("
-    comandoSQL +="'"+str(lojas_conveniadas.cnpj)+"'," \
-                "'"+str(lojas_conveniadas.razao_social)+"'," \
-                "'"+str(lojas_conveniadas.IE)+"'," \
-                "'"+str(lojas_conveniadas.pais)+"'," \
-                "'"+str(lojas_conveniadas.estado)+"'," \
-                "'"+str(lojas_conveniadas.cidade)+"'," \
-                "'"+str(lojas_conveniadas.bairro)+"'," \
-                "'"+str(lojas_conveniadas.logradouro)+"'"
+    comandoSQL +="'" + str(loja_conveniada.cnpj) + "'," \
+                "'" + str(loja_conveniada.razao_social) + "'," \
+                "'" + str(loja_conveniada.IE) + "'," \
+                "'" + str(loja_conveniada.pais) + "'," \
+                "'" + str(loja_conveniada.estado) + "'," \
+                "'" + str(loja_conveniada.cidade) + "'," \
+                "'" + str(loja_conveniada.bairro) + "'," \
+                "'" + str(loja_conveniada.logradouro) + "'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -57,7 +57,7 @@ def cadastrar(oficina):
     db.commit()
     cursor.close()
 
-    return lojas_conveniadas
+    return loja_conveniada
 
 def editar(codigo, lojas_conveniadas):
     #Montando comando SQL
@@ -90,7 +90,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(lojas_conveniadas.Lojas_Conveniadas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5],cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8]))
+        lista.append(loja_conveniada.Lojas_Conveniadas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5], cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -101,7 +101,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return lojas_conveniadas.Lojas_Conveniadas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5],cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8])
+        return loja_conveniada.Lojas_Conveniadas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5], cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8])
     else:
         return None
 
@@ -111,6 +111,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return lojas_conveniadas.Lojas_Conveniadas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5],cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8])
+        return loja_conveniada.Lojas_Conveniadas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5], cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8])
     else:
         return None

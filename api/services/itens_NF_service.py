@@ -1,4 +1,4 @@
-from ..entidades import itens_NF
+from ..entidades import item_NF
 from ..database import db
 
 nome_tabela = "itens_NF"
@@ -10,9 +10,9 @@ def criar_tabela():
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
                 "quantidade varchar(11)," \
-                "preco varchar(15)," \
-                "codigoProduto INTEGER references produtos(codigo) UNIQUE"\
-                "codigoNF INTEGER references notas_fiscais(codigo) UNIQUE"
+                "preco REAL," \
+                "codigoProduto INTEGER references produtos(codigo),"\
+                "codigoNF INTEGER references notas_fiscais(codigo)"
     comandoSQL += ");"
 
 
@@ -72,7 +72,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(itens_NF.itens_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4]))
+        lista.append(item_NF.itens_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -83,7 +83,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return itens_NF.itens_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4])
+        return item_NF.itens_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4])
     else:
         return None
 
@@ -93,6 +93,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return itens_NF.itens_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4])
+        return item_NF.itens_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4])
     else:
         return None

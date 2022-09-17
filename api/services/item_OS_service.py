@@ -11,9 +11,9 @@ def criar_tabela():
     comandoSQL += "codigo serial primary key," \
                 "preco varchar(10)," \
                 "status varchar(8)," \
-                "codigoServico INTEGER references servico(codigo) UNIQUE" \
-                "codigoOS INTEGER references ordem_servico(codigo) UNIQUE" \
-                "codigoMecanico INTEGER references macanicos(codigo) UNIQUE"
+                "codigoServico INTEGER references servicos(codigo) UNIQUE," \
+                "codigoOS INTEGER references ordem_servicos(codigo) UNIQUE," \
+                "codigoMecanico INTEGER references mecanicos(codigo) UNIQUE"
     comandoSQL += ");"
 
 

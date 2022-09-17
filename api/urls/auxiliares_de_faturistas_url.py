@@ -1,4 +1,4 @@
-from ..entidades import auxiliares_de_faturistas
+from ..entidades import auxiliar_de_faturista
 from ..views import auxiliares_de_faturistas_view
 from flask import request, Blueprint, make_response
 from api import app
@@ -10,7 +10,7 @@ def url_geral_auxiliares_de_faturistas():
     if (request.method == "GET"):
         return auxiliares_de_faturistas_view.auxiliares_de_faturistas_view().getAll()
     if (request.method == "POST"):
-        auxiliares_de_faturistasTemp = auxiliares_de_faturistas.auxiliares_de_faturistas(
+        auxiliares_de_faturistasTemp = auxiliar_de_faturista.auxiliares_de_faturistas(
             matriculaFuncionario=request.json["matriculaFuncionario"],
         )
 
@@ -22,7 +22,7 @@ def url_unico_auxiliares_de_faturistas(id):
     if request.method == 'GET':
         return auxiliares_de_faturistas_view.auxiliares_de_faturistas_view().get(id)
     if request.method == 'POST':
-        auxiliares_de_faturistasTemp = auxiliares_de_faturistas.auxiliares_de_faturistas(
+        auxiliares_de_faturistasTemp = auxiliar_de_faturista.auxiliares_de_faturistas(
             codigo=id,
             matriculaFuncionario=request.json["matriculaFuncionario"],
         )

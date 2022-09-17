@@ -1,4 +1,4 @@
-from ..entidades import servicos
+from ..entidades import servico
 from ..views import tabelas_de_precos_view
 from flask import request, Blueprint, make_response
 from api import app

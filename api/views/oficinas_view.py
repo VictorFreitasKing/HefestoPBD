@@ -1,6 +1,6 @@
 import json
 from flask import make_response, Blueprint
-from ..entidades import oficinas
+from ..entidades import oficina
 from ..services import oficinas_service
 
 #views = Blueprint('views', __name__)

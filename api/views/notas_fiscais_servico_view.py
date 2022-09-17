@@ -1,5 +1,5 @@
 from flask import make_response, Blueprint
-from ..entidades import notas_fiscais_servico
+from ..entidades import nota_fiscal_servico
 from ..services import notas_fiscais_servico_service
 
 #views = Blueprint('views', __name__)

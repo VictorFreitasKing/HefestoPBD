@@ -1,4 +1,4 @@
-from ..entidades import notas_fiscais
+from ..entidades import nota_fiscal
 from ..database import db
 
 nome_tabela = "notas_fiscais"
@@ -8,11 +8,11 @@ def criar_tabela():
     comandoSQL = "CREATE TABLE IF NOT EXISTS "
     comandoSQL += nome_tabela
     comandoSQL += "("
-    comandoSQL += "codigo_loja_conveniada INTEGER primary key," \   #primary key + chave estrangeira
-                "numero erial primary key," \
-                "serie erial primary key," \
-                "codigoAuxiliarFaturista INTEGER references auxiliares_de_faturistas(codigo) UNIQUE" \
-                "codigoOS INTEGER references ordem_servico(codigo) UNIQUE"\
+    comandoSQL += "codigo_loja_conveniada INTEGER primary key UNIQUE references lojas_conveniadas(codigo)," \
+                "numero varchar(9)," \
+                "serie varchar(3)," \
+                "codigoAuxiliarFaturista INTEGER references auxiliares_de_faturistas(codigo) UNIQUE," \
+                "codigoOS INTEGER references ordem_servicos(codigo) UNIQUE,"\
                 "total varchar(15)"
     comandoSQL += ");"
 
@@ -77,7 +77,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(notas_fiscais.notas_fiscais(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4]))
+        lista.append(nota_fiscal.notas_fiscais(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -88,7 +88,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return notas_fiscais.notas_fiscais(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
+        return nota_fiscal.notas_fiscais(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
     else:
         return None
 
@@ -98,6 +98,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return notas_fiscais.notas_fiscais(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
+        return nota_fiscal.notas_fiscais(codigo=data_manager[0], codigoChefe=data_manager[1], marca=data_manager[2], placa=data_manager[3], modelo=data_manager[4])
     else:
         return None

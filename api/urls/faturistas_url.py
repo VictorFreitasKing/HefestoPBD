@@ -1,4 +1,4 @@
-from ..entidades import faturistas
+from ..entidades import faturista
 from ..views import faturistas_view
 from flask import request, Blueprint, make_response
 from api import app
@@ -10,7 +10,7 @@ def url_geral_faturistas():
     if (request.method == "GET"):
         return faturistas_view.faturistas_view().getAll()
     if (request.method == "POST"):
-        faturistasTemp = faturistas.faturistas(
+        faturistasTemp = faturista.faturistas(
             matriculaFuncionario=request.json["matriculaFuncionario"],
         )
 
@@ -22,7 +22,7 @@ def url_unico_faturistas(id):
     if request.method == 'GET':
         return faturistas_view.faturistas_view().get(id)
     if request.method == 'POST':
-        faturistasTemp = faturistas.faturistas(
+        faturistasTemp = faturista.faturistas(
             codigo=id,
             matriculaFuncionario=request.json["matriculaFuncionario"],
         )
