@@ -1,7 +1,7 @@
 from ..entidades import item_OS
 from ..database import db
 
-nome_tabela = "item_OS"
+nome_tabela = "items_OS"
 
 def criar_tabela():
     #Montando comando SQL  codigoOS, codigoServico, codigoMecanico, preco, status, codigo=0
@@ -9,11 +9,11 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "preco varchar(10)," \
-                "status varchar(8)," \
-                "codigoServico INTEGER references servicos(codigo) UNIQUE," \
-                "codigoOS INTEGER references ordem_servicos(codigo) UNIQUE," \
-                "codigoMecanico INTEGER references mecanicos(codigo) UNIQUE"
+                  "codigoOS INTEGER references ordem_servicos(codigo) UNIQUE," \
+                  "codigoServico INTEGER references servicos(codigo) UNIQUE," \
+                  "codigoMecanico INTEGER references mecanicos(codigo) UNIQUE," \
+                  "preco REAL," \
+                  "status varchar(8)"
     comandoSQL += ");"
 
 
@@ -53,11 +53,11 @@ def editar(codigo, item_OS):
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL += "preco = '" + str(item_OS.preco) + "'," \
-                "codigoOS = '"+str(item_OS.codigoOS)+"'," \
+    comandoSQL += "codigoOS = '"+str(item_OS.codigoOS)+"'," \
                 "codigoServico = '" + str(item_OS.codigoServico) + "'," \
                 "codigoMecanico = '" + str(item_OS.codigoMecanico) + "'," \
-                "status = '"+str(item_OS.status)+"'"
+                "preco = '"+str(item_OS.preco)+"'," \
+                "status = '"+str(item_OS.status)+""
     comandoSQL += " where codigo='"+str(codigo)+"';"
 
     #Executando comando no banco de dados
@@ -76,9 +76,8 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(item_OS.item_OS(codigo=data_manager[0], codigoOS=data_manager[1], codigoServico=data_manager[2], codigoMecanico=data_manager[3], preco=data_manager[4], status=data_manager[5]))
+        lista.append(item_OS.Item_OS(codigo=data_manager[0], codigoOS=data_manager[1], codigoServico=data_manager[2], codigoMecanico=data_manager[3], preco=data_manager[4], status=data_manager[5]))
         data_manager = cursor.fetchone()
-
     return lista
 
 def get(id):
@@ -87,7 +86,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return item_OS.item_OS(codigo=data_manager[0], codigoOS=data_manager[1], codigoServico=data_manager[2], codigoMecanico=data_manager[3], preco=data_manager[4], status=data_manager[5])
+        return item_OS.Item_OS(codigo=data_manager[0], codigoOS=data_manager[1], codigoServico=data_manager[2], codigoMecanico=data_manager[3], preco=data_manager[4], status=data_manager[5])
     else:
         return None
 
@@ -97,6 +96,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return item_OS.item_OS(codigo=data_manager[0], codigoOS=data_manager[1], codigoServico=data_manager[2], codigoMecanico=data_manager[3], preco=data_manager[4], status=data_manager[5])
+        return item_OS.Item_OS(codigo=data_manager[0], codigoOS=data_manager[1], codigoServico=data_manager[2], codigoMecanico=data_manager[3], preco=data_manager[4], status=data_manager[5])
     else:
         return None

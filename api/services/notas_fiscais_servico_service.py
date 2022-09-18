@@ -9,10 +9,10 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                  "data_emissao varchar(10)," \
-                  "total varchar(15)," \
-                  "codigoFaturista INTEGER references faturistas(codigo) UNIQUE" \
-                  "codigoOS INTEGER references ordem_servico(codigo) UNIQUE"
+                  "codigoOS INTEGER references ordem_servico(codigo) UNIQUE," \
+                  "codigoFaturista INTEGER references faturistas(codigo) UNIQUE," \
+                  "data_emissao Date," \
+                  "total REAL,"
     comandoSQL += ");"
 
 
@@ -21,20 +21,20 @@ def criar_tabela():
     db.commit()
     cursor.close()
 
-def cadastrar(notas_fiscais_servico):
+def cadastrar(nota_fiscal_servico):
     #Montando comando SQL
     comandoSQL = "insert into "
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigoOS," \
-                "data_emissao," \
-                "codigoFaturista," \
-                "total" 
+                  "codigoFaturista," \
+                  "data_emissao," \
+                  "total"
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(notas_fiscais_servico.codigoOS)+"'," \
-                "'" + str(notas_fiscais_servico.data_emissao) + "'," \
-                "'" + str(notas_fiscais_servico.codigoFaturista) + "'," \
-                "'"+str(notas_fiscais_servico.total)+"'"
+    comandoSQL += "'" + str(nota_fiscal_servico.codigoOS) + "'," \
+                "'" + str(nota_fiscal_servico.codigoFaturista) + "'," \
+                "'" + str(nota_fiscal_servico.data_emissao) + "'," \
+                "'" + str(nota_fiscal_servico.total) + "'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -43,17 +43,17 @@ def cadastrar(notas_fiscais_servico):
     db.commit()
     cursor.close()
 
-    return notas_fiscais_servico
+    return nota_fiscal_servico
 
-def editar(codigo, notas_fiscais_servico):
+def editar(codigo, nota_fiscal_servico):
     #Montando comando SQL
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL += "codigoFaturista = '"+ str(notas_fiscais_servico.codigoFaturista) +"', " \
-                "codigoOS = '"+str(notas_fiscais_servico.codigoOS)+"'," \
-                "data_emissao = '" + str(notas_fiscais_servico.data_emissao) + "'," \
-                "total = '"+str(notas_fiscais_servico.total)+"'"
+    comandoSQL += "codigoOS = '" + str(nota_fiscal_servico.codigoOS) + "', " \
+                "codigoFaturista = '" + str(nota_fiscal_servico.codigoFaturista) + "'," \
+                "data_emissao = '" + str(nota_fiscal_servico.data_emissao) + "'," \
+                "total = '" + str(nota_fiscal_servico.total) + "'"
     comandoSQL += " where codigo='"+str(codigo)+"';"
 
     #Executando comando no banco de dados
@@ -61,7 +61,7 @@ def editar(codigo, notas_fiscais_servico):
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
-    return notas_fiscais_servico
+    return nota_fiscal_servico
 
 def getAll():
     comandoSQL = "SELECT * FROM "+nome_tabela+";"
@@ -72,7 +72,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(nota_fiscal_servico.notas_fiscais_servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4]))
+        lista.append(nota_fiscal_servico.Nota_Fiscal_Servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -83,7 +83,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return nota_fiscal_servico.notas_fiscais_servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4])
+        return nota_fiscal_servico.Nota_Fiscal_Servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4])
     else:
         return None
 
@@ -93,6 +93,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return nota_fiscal_servico.notas_fiscais_servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4])
+        return nota_fiscal_servico.Nota_Fiscal_Servico(codigo=data_manager[0], codigoOS=data_manager[1], codigoFaturista=data_manager[2], data_emissao=data_manager[3], total=data_manager[4])
     else:
         return None

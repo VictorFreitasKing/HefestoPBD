@@ -9,9 +9,9 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "latitude varchar(11)," \
-                "longitude varchar(11)," \
-                "codigoCliente INTEGER references clientes(codigo) UNIQUE"
+                  "codigoCliente INTEGER references clientes(codigo) UNIQUE," \
+                  "latitude varchar(11)," \
+                  "longitude varchar(11)"
     comandoSQL += ");"
 
 
@@ -26,12 +26,12 @@ def cadastrar(solicitacao_reboque):
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigoCliente," \
-                "longitude," \
-                "latitude,"
+                  "latitude," \
+                  "longetude,"
     comandoSQL +=") values ("
     comandoSQL += "'"+str(solicitacao_reboque.codigoCliente)+"'," \
-                "'" + str(solicitacao_reboque.longitude) + "'," \
-                "'"+str(solicitacao_reboque.latitude)+"'"
+                "'" + str(solicitacao_reboque.latitude) + "'," \
+                "'"+str(solicitacao_reboque.longitude)+"'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -47,9 +47,9 @@ def editar(codigo, solicitacao_reboque):
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL += "latitude = '"+ str(solicitacao_reboque.latitude) +"', " \
-                "codigoChefe = '"+str(solicitacao_reboque.codigoCliente)+"'," \
-                "placa = '" + str(solicitacao_reboque.longitude) + "',"
+    comandoSQL += "codigoCliente = '"+ str(solicitacao_reboque.latitude) +"', " \
+                  "latitude = '"+str(solicitacao_reboque.codigoCliente)+"'," \
+                  "longitude = '" + str(solicitacao_reboque.longitude) + "',"
     comandoSQL += " where codigo='"+str(codigo)+"';"
 
     #Executando comando no banco de dados
@@ -68,7 +68,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(solicitacao_reboque.solicitacao_reboque(codigo=data_manager[0], codigoCliente=data_manager[1], latitude=data_manager[2], longitude=data_manager[3]))
+        lista.append(solicitacao_reboque.Solicitacao_reboque(codigo=data_manager[0], codigoCliente=data_manager[1], latitude=data_manager[2], longitude=data_manager[3]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -79,7 +79,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return solicitacao_reboque.solicitacao_reboque(codigo=data_manager[0], codigoCliente=data_manager[1], latitude=data_manager[2], longitude=data_manager[3])
+        return solicitacao_reboque.Solicitacao_reboque(codigo=data_manager[0], codigoCliente=data_manager[1], latitude=data_manager[2], longitude=data_manager[3])
     else:
         return None
 
@@ -89,6 +89,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return solicitacao_reboque.solicitacao_reboque(codigo=data_manager[0], codigoCliente=data_manager[1], latitude=data_manager[2], longitude=data_manager[3])
+        return solicitacao_reboque.Solicitacao_reboque(codigo=data_manager[0], codigoCliente=data_manager[1], latitude=data_manager[2], longitude=data_manager[3])
     else:
         return None

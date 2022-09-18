@@ -1,4 +1,4 @@
-#Produto = PEça no ER
+#Produto = Peça no ER
 class Produto():
     def __init__(self, descricao, codigo=0):
         self.__codigo = codigo

@@ -9,8 +9,7 @@ def criar_tabela():
    comandoSQL += nome_tabela
    comandoSQL += "("
    comandoSQL += "codigo serial primary key," \
-               "placa varchar(255)" \
-
+               "descricao varchar(60)"
    comandoSQL += ");"
 
 
@@ -19,14 +18,14 @@ def criar_tabela():
    db.commit()
    cursor.close()
 
-def cadastrar(servicos):
+def cadastrar(servico):
    #Montando comando SQL
    comandoSQL = "insert into "
    comandoSQL += nome_tabela
    comandoSQL += "("
    comandoSQL += "descricao"
    comandoSQL +=") values ("
-   comandoSQL += "'"+str(servicos.descricao)+"'"
+   comandoSQL += "'"+str(servico.descricao)+"'"
    comandoSQL += ");"
 
    #Executando comando no banco de dados
@@ -35,14 +34,14 @@ def cadastrar(servicos):
    db.commit()
    cursor.close()
 
-   return servicos
+   return servico
 
-def editar(codigo, servicos):
+def editar(codigo, servico):
    #Montando comando SQL
    comandoSQL = "UPDATE "
    comandoSQL += nome_tabela
    comandoSQL += " SET "
-   comandoSQL += "descricao = '"+ str(servicos.descricao) +"';"
+   comandoSQL += "descricao = '"+ str(servico.descricao) +"'"
    comandoSQL += " where codigo='"+str(codigo)+"';"
 
    #Executando comando no banco de dados
@@ -50,7 +49,7 @@ def editar(codigo, servicos):
    cursor.execute(comandoSQL)
    db.commit()
    cursor.close()
-   return servicos
+   return servico
 
 def getAll():
    comandoSQL = "SELECT * FROM "+nome_tabela+";"
@@ -61,7 +60,7 @@ def getAll():
    if data_manager is None:
        return None
    while data_manager is not None:
-       lista.append(servico.servicos(codigo=data_manager[0], descricao=data_manager[1]))
+       lista.append(servico.Servico(codigo=data_manager[0], descricao=data_manager[1]))
        data_manager = cursor.fetchone()
 
    return lista
@@ -72,7 +71,7 @@ def get(id):
    cursor.execute(comandoSQL)
    data_manager = cursor.fetchone()
    if data_manager:
-       return servico.servicos(codigo=data_manager[0], descricao=data_manager[1])
+       return servico.Servico(codigo=data_manager[0], descricao=data_manager[1])
    else:
        return None
 

@@ -1,7 +1,7 @@
-from ..entidades import recepcionista
+from ..entidades import chefe
 from ..database import db
 
-nome_tabela = "recepcionistas"
+nome_tabela = "chefes"
 
 def criar_tabela():
     #Montando comando SQL
@@ -18,14 +18,14 @@ def criar_tabela():
     db.commit()
     cursor.close()
 
-def cadastrar(Recepcionistas):
+def cadastrar(chefe):
     #Montando comando SQL
     comandoSQL = "insert into "
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "matriculaFuncionario" 
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(Recepcionistas.matriculaFuncionario)+"',"
+    comandoSQL += "'"+str(chefe.matriculaFuncionario)+"'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -34,15 +34,15 @@ def cadastrar(Recepcionistas):
     db.commit()
     cursor.close()
 
-    return Recepcionistas
+    return chefe
 
-def editar(codigo, Recepcionistas):
+def editar(codigo, chefe):
     #Montando comando SQL
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL += "nome = '"+ str(Recepcionistas.nome) +"', " \
-                "matriculaFuncionario = '"+str(Recepcionistas.matriculaFuncionario)+"'," 
+    comandoSQL += "nome = '"+ str(chefe.nome) +"', " \
+                "matriculaFuncionario = '"+str(chefe.matriculaFuncionario)+"',"
     comandoSQL += " where codigo='"+str(codigo)+"';"
 
     #Executando comando no banco de dados
@@ -50,7 +50,7 @@ def editar(codigo, Recepcionistas):
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
-    return Recepcionistas
+    return chefe
 
 def getAll():
     comandoSQL = "SELECT * FROM "+nome_tabela+";"
@@ -61,7 +61,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(recepcionista.Recepcionista(codigo=data_manager[0], matriculaFuncionario=data_manager[1]))
+        lista.append(chefe.Chefe(codigo=data_manager[0], matriculaFuncionario=data_manager[1]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -72,7 +72,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return recepcionista.Recepcionista(codigo=data_manager[0], matriculaFuncionario=data_manager[1])
+        return chefe.Chefe(codigo=data_manager[0], matriculaFuncionario=data_manager[1])
     else:
         return None
 
@@ -82,6 +82,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return recepcionista.Recepcionista(codigo=data_manager[0], matriculaFuncionario=data_manager[1])
+        return chefe.Chefe(codigo=data_manager[0], matriculaFuncionario=data_manager[1])
     else:
         return None

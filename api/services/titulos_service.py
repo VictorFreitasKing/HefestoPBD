@@ -9,35 +9,32 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "data_baixa varchar(10)"\
-                "valor varchar(11)," \
-                "vencimento varchar(15)," \
-                "codigoRecepcionista INTEGER references recepcionistas(codigo) UNIQUE" \
-                "codigoNFS INTEGER references notas_fiscais_servico(codigo) UNIQUE"
+                  "codigoNFS INTEGER references notas_fiscais_servico(codigo) UNIQUE," \
+                  "codigoRecepcionista INTEGER references recepcionistas(codigo) UNIQUE," \
+                  "valor REAL," \
+                  "vencimento Date," \
+                  "data_baixa Date"
     comandoSQL += ");"
-
 
     cursor = db.cursor()
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
 
-def cadastrar(titulos):
+def cadastrar(titulo):
     #Montando comando SQL
     comandoSQL = "insert into "
     comandoSQL += nome_tabela
     comandoSQL += "("
-    comandoSQL +="data_baixa" \
-                "codigoNFS," \
-                "valor," \
+    comandoSQL +="codigoNFS," \
                 "codigoRecepcionista," \
-                "vencimento" 
+                "valor," \
+                "vencimento"
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(titulos.data_baixa)+"'," \
-                "'"+str(titulos.codigoNFS)+"'," \
-                "'" + str(titulos.valor) + "'," \
-                "'" + str(titulos.codigoRecepcionista) + "'," \
-                "'"+str(titulos.vencimento)+"'"
+    comandoSQL += "'" + str(titulo.codigoNFS) + "'," \
+                "'" + str(titulo.codigoRecepcionista) + "'," \
+                "'" + str(titulo.valor) + "'," \
+                "'" + str(titulo.vencimento) + "'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -46,18 +43,18 @@ def cadastrar(titulos):
     db.commit()
     cursor.close()
 
-    return titulos
+    return titulo
 
-def editar(codigo, titulos):
+def editar(codigo, titulo):
     #Montando comando SQL
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL += "data_baixa = '"+ str(titulos.data_baixa) +"', " \
-                "codigoRecepcionista = '"+ str(titulos.codigoRecepcionista) +"', " \
-                "codigoNFS = '"+str(titulos.codigoNFS)+"'," \
-                "valor = '" + str(titulos.valor) + "'," \
-                "vencimento = '"+str(titulos.vencimento)+"'"
+    comandoSQL += "codigoNFS = '" + str(titulo.codigoNFS) + "', " \
+                "codigoRecepcionista = '" + str(titulo.codigoRecepcionista) + "', " \
+                "valor = '" + str(titulo.valor) + "'," \
+                "vencimento = '" + str(titulo.vencimento) + "'," \
+                "data_baixa = '" + str(titulo.data_baixa) + "'"
     comandoSQL += " where codigo='"+str(codigo)+"';"
 
     #Executando comando no banco de dados
@@ -65,7 +62,7 @@ def editar(codigo, titulos):
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
-    return titulos
+    return titulo
 
 def getAll():
     comandoSQL = "SELECT * FROM "+nome_tabela+";"
@@ -76,7 +73,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(titulo.titulos(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5]))
+        lista.append(titulo.Titulo(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -87,7 +84,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return titulo.titulos(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5])
+        return titulo.Titulo(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5])
     else:
         return None
 
@@ -97,6 +94,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return titulo.titulos(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5])
+        return titulo.Titulo(codigo=data_manager[0], codigoNFS=data_manager[1], codigoRecepcionista=data_manager[2], valor=data_manager[3], vencimento=data_manager[4], data_baixa=data_manager[5])
     else:
         return None

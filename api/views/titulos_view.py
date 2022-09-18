@@ -26,5 +26,5 @@ class titulos_view():
         else:
             return make_response({}, 200)
     def patch(self, id, titulos):
-        titulos_service.editar(codigo=id, titulos=titulos)
+        titulos_service.editar(codigo=id, titulo=titulos)
         return make_response(titulos.toJson(), 201)

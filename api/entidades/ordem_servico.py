@@ -1,4 +1,4 @@
-class Ordem_Servico():
+class Ordem_servico():
     def __init__(self, codigoMecanico, codigoVeiculo, entrada, saida, total, codigo=0):
         self.__codigo = codigo
         self.__codigoMecanico = codigoMecanico

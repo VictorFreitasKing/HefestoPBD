@@ -1,7 +1,7 @@
-from ..entidades import item_NF
+from ..entidades import tabela_de_precos
 from ..database import db
 
-nome_tabela = "itens_NF"
+nome_tabela = "tabela_de_precos"
 
 def criar_tabela():
     #Montando comando SQL
@@ -9,32 +9,31 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "quantidade varchar(11)," \
+                "codigoServico INTEGER references servicos(codigo) UNIQUE," \
                 "preco REAL," \
-                "codigoProduto INTEGER references produtos(codigo),"\
-                "codigoNF INTEGER references notas_fiscais(codigo)"
+                "inicio Date," \
+                "fim Date"
     comandoSQL += ");"
-
 
     cursor = db.cursor()
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
 
-def cadastrar(itens_NF):
+def cadastrar(tabela_de_precos):
     #Montando comando SQL
     comandoSQL = "insert into "
     comandoSQL += nome_tabela
     comandoSQL += "("
-    comandoSQL += "codigoNF," \
-                "quantidade," \
-                "codigoProduto," \
-                "preco" 
+    comandoSQL += "codigoServico," \
+                "preco," \
+                "inicio," \
+                "fim"
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(itens_NF.codigoNF)+"'," \
-                "'" + str(itens_NF.quantidade) + "'," \
-                "'" + str(itens_NF.codigoProduto) + "'," \
-                "'"+str(itens_NF.preco)+"'"
+    comandoSQL += "'"+str(tabela_de_precos.codigoServico)+"'," \
+                "'" + str(tabela_de_precos.preco) + "'," \
+                "'" + str(tabela_de_precos.inicio) + "'," \
+                "'"+str(tabela_de_precos.fim)+"'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -43,25 +42,28 @@ def cadastrar(itens_NF):
     db.commit()
     cursor.close()
 
-    return itens_NF
+    return tabela_de_precos
 
-def editar(codigo, itens_NF):
+def editar(codigo, tabela_de_precos):
     #Montando comando SQL
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL += "codigoProduto = '"+ str(itens_NF.codigoProduto) +"', " \
-                "codigoNF = '"+str(itens_NF.codigoNF)+"'," \
-                "quantidade = '" + str(itens_NF.quantidade) + "'," \
-                "preco = '"+str(itens_NF.preco)+"'"
-    comandoSQL += " where codigo='"+str(codigo)+"';"
+    comandoSQL += "codigo serial primary key," \
+                  "codigoServico = '"+str(tabela_de_precos.codigoServico)+"'," \
+                  "preco = '"+str(tabela_de_precos.preco)+"'," \
+                  "inicio = '"+str(tabela_de_precos.inicio)+"'," \
+                  "fim = '"+str(tabela_de_precos.fim)+"'," \
+                  "codigoServico INTEGER references servicos(codigo) UNIQUE"
+    comandoSQL += " where codigo='" + str(codigo) + "';"
+    comandoSQL += ");"
 
     #Executando comando no banco de dados
     cursor = db.cursor()
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
-    return itens_NF
+    return tabela_de_precos
 
 def getAll():
     comandoSQL = "SELECT * FROM "+nome_tabela+";"
@@ -72,7 +74,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(item_NF.itens_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4]))
+        lista.append(tabela_de_precos.Tabela_de_preco(codigo=data_manager[0], codigoServico=data_manager[1], preco=data_manager[2], inicio=data_manager[3], fim=data_manager[4]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -83,7 +85,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return item_NF.itens_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4])
+        return tabela_de_precos.Tabela_de_preco(codigo=data_manager[0], codigoServico=data_manager[1], preco=data_manager[2], inicio=data_manager[3], fim=data_manager[4])
     else:
         return None
 
@@ -93,6 +95,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return item_NF.itens_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4])
+        return tabela_de_precos.Tabela_de_preco(codigo=data_manager[0], codigoServico=data_manager[1], preco=data_manager[2], inicio=data_manager[3], fim=data_manager[4])
     else:
         return None

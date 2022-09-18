@@ -1,7 +1,7 @@
 from ..entidades import etapa_servico
 from ..database import db
 
-nome_tabela = "etapa_servico"
+nome_tabela = "etapas_servico"
 
 def criar_tabela():
     #Montando comando SQL
@@ -9,8 +9,8 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "descricao varchar(30)," \
-                "codigoServico INTEGER references servicos(codigo) UNIQUE"
+                "codigoServico INTEGER references servicos(codigo) UNIQUE," \
+                "descricao varchar(30)"
     comandoSQL += ");"
 
 
@@ -24,10 +24,10 @@ def cadastrar(etapa_servico):
     comandoSQL = "insert into "
     comandoSQL += nome_tabela
     comandoSQL += "("
-    comandoSQL += "codigoChefe," \
+    comandoSQL += "codigoServico," \
                 "descricao"
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(etapa_servico.codigoChefe)+"'," \
+    comandoSQL += "'"+str(etapa_servico.codigoServico)+"'," \
                 "'"+str(etapa_servico.descricao)+"'"
     comandoSQL += ");"
 
@@ -39,13 +39,13 @@ def cadastrar(etapa_servico):
 
     return etapa_servico
 
-def editar(codigo, servicos):
+def editar(codigo, etapa_servico):
     #Montando comando SQL
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL += "descricao = '"+ str(etapa_servico.descricao) +"', " \
-                "codigoServico = '"+str(etapa_servico.codigoServico)+"',"
+    comandoSQL += "descricao = '"+ str(etapa_servico.codigoServico) +"', " \
+                "descricao = '"+str(etapa_servico.descricao)+"',"
     comandoSQL += " where codigo='"+str(codigo)+"';"
 
     #Executando comando no banco de dados
@@ -53,7 +53,7 @@ def editar(codigo, servicos):
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
-    return servicos
+    return etapa_servico
 
 def getAll():
     comandoSQL = "SELECT * FROM "+nome_tabela+";"
@@ -64,7 +64,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(etapa_servico.etapa_servico(codigo=data_manager[0], codigoChefe=data_manager[1], descricao=data_manager[2]))
+        lista.append(etapa_servico.Etapa_Servico(codigo=data_manager[0], codigoServico=data_manager[1], descricao=data_manager[2], ordem=data_manager[3])
         data_manager = cursor.fetchone()
 
     return lista

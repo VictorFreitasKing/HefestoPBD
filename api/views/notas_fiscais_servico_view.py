@@ -26,5 +26,5 @@ class notas_fiscais_servico_view():
         else:
             return make_response({}, 200)
     def patch(self, id, notas_fiscais_servico):
-        notas_fiscais_servico_service.editar(codigo=id, notas_fiscais_servico=notas_fiscais_servico)
+        notas_fiscais_servico_service.editar(codigo=id, nota_fiscal_servico=notas_fiscais_servico)
         return make_response(notas_fiscais_servico.toJson(), 201)

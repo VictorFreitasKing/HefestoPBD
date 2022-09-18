@@ -1,4 +1,4 @@
-class Recepicionista():
+class Recepcionista():
     def __init__(self, matriculaFuncionario, codigo=0):
         self.__codigo = codigo
         self.__matriculaFuncionario = matriculaFuncionario

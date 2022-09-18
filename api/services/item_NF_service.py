@@ -1,7 +1,7 @@
-from ..entidades import faturista
+from ..entidades import item_NF
 from ..database import db
 
-nome_tabela = "faturistas"
+nome_tabela = "itens_NF"
 
 def criar_tabela():
     #Montando comando SQL
@@ -9,23 +9,30 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "matriculaFuncionario INTEGER references funcionarios(matricula) UNIQUE" 
+                  "codigoNF INTEGER references notas_fiscais(codigo)," \
+                  "codigoProduto INTEGER references produtos(codigo)," \
+                  "quantidade INTEGER," \
+                  "preco REAL"
     comandoSQL += ");"
-
-
     cursor = db.cursor()
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
 
-def cadastrar(faturistas):
+def cadastrar(item_NF):
     #Montando comando SQL
     comandoSQL = "insert into "
     comandoSQL += nome_tabela
     comandoSQL += "("
-    comandoSQL += "matriculaFuncionario" 
+    comandoSQL += "codigoNF," \
+                  "codigoProduto," \
+                  "quantidade," \
+                  "preco"
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(faturistas.matriculaFuncionario)+"',"
+    comandoSQL += "'" + str(item_NF.codigoNF) + "'," \
+                "'" + str(item_NF.codigoProduto) + "'," \
+                "'" + str(item_NF.quantidade) + "'," \
+                "'" + str(item_NF.preco) + "'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -34,15 +41,17 @@ def cadastrar(faturistas):
     db.commit()
     cursor.close()
 
-    return faturistas
+    return item_NF
 
-def editar(codigo, faturistas):
+def editar(codigo, item_NF):
     #Montando comando SQL
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL += "nome = '"+ str(faturistas.nome) +"', " \
-                "matriculaFuncionario = '"+str(faturistas.matriculaFuncionario)+"'," 
+    comandoSQL += "codigoNF = '" + str(item_NF.codigoNF) + "', " \
+                "codigoProduto = '" + str(item_NF.codigoProduto) + "'," \
+                "quantidade = '" + str(item_NF.quantidade) + "'," \
+                "preco = '" + str(item_NF.preco) + "'"
     comandoSQL += " where codigo='"+str(codigo)+"';"
 
     #Executando comando no banco de dados
@@ -50,7 +59,7 @@ def editar(codigo, faturistas):
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
-    return faturistas
+    return item_NF
 
 def getAll():
     comandoSQL = "SELECT * FROM "+nome_tabela+";"
@@ -61,7 +70,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(faturista.Faturista(codigo=data_manager[0], matriculaFuncionario=data_manager[1]))
+        lista.append(item_NF.Item_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -72,7 +81,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return faturista.Faturista(codigo=data_manager[0], matriculaFuncionario=data_manager[1])
+        return item_NF.Item_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4])
     else:
         return None
 
@@ -82,6 +91,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return faturista.Faturista(codigo=data_manager[0], matriculaFuncionario=data_manager[1])
+        return item_NF.Item_NF(codigo=data_manager[0], codigoNF=data_manager[1], codigoProduto=data_manager[2], quantidade=data_manager[3], preco=data_manager[4])
     else:
         return None

@@ -1,7 +1,7 @@
-from ..entidades import loja_conveniada
+from ..entidades import oficina
 from ..database import db
 
-nome_tabela = "lojas_conveniadas"
+nome_tabela = "oficinas"
 
 def criar_tabela():
     #Montando comando SQL
@@ -10,15 +10,15 @@ def criar_tabela():
     comandoSQL += "("
 #  eeee eu n sei se ta certo a parte do codigoChefe 
     comandoSQL += "codigo serial primary key," \
-                "cnpj varchar(7) UNIQUE," \
-                "razao_social varchar(11)," \
+                "codigoChefe INTEGER references chefes(codigo) UNIQUE," \
+                "razao_social varchar(30)," \
+                "cnpj varchar(14) UNIQUE," \
                 "IE varchar(11)," \
                 "pais varchar(15)," \
                 "estado varchar(15)," \
                 "cidade varchar(15)," \
                 "bairro varchar(15)," \
                 "logradouro varchar(30)"
-
     comandoSQL += ");"
 
 
@@ -32,23 +32,26 @@ def cadastrar(oficina):
     comandoSQL = "insert into "
     comandoSQL += nome_tabela
     comandoSQL += "("
-    comandoSQL += "cnpj," \
-                "razao_social," \
+    comandoSQL += "codigoChefe," \
+                "razao_social" \
+                "cnpj," \
                 "IE," \
                 "pais," \
                 "estado," \
                 "cidade," \
                 "bairro," \
                 "logradouro"
+
     comandoSQL +=") values ("
-    comandoSQL +="'" + str(loja_conveniada.cnpj) + "'," \
-                "'" + str(loja_conveniada.razao_social) + "'," \
-                "'" + str(loja_conveniada.IE) + "'," \
-                "'" + str(loja_conveniada.pais) + "'," \
-                "'" + str(loja_conveniada.estado) + "'," \
-                "'" + str(loja_conveniada.cidade) + "'," \
-                "'" + str(loja_conveniada.bairro) + "'," \
-                "'" + str(loja_conveniada.logradouro) + "'"
+    comandoSQL +="'" + str(oficina.codigoChefe) + "'," \
+                "'" + str(oficina.razao_social) + "'," \
+                "'" + str(oficina.cnpj) + "'," \
+                "'" + str(oficina.IE) + "'," \
+                "'" + str(oficina.pais) + "'," \
+                "'" + str(oficina.estado) + "'," \
+                "'" + str(oficina.cidade) + "'," \
+                "'" + str(oficina.bairro) + "'," \
+                "'" + str(oficina.logradouro) + "'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -57,21 +60,22 @@ def cadastrar(oficina):
     db.commit()
     cursor.close()
 
-    return loja_conveniada
+    return oficina
 
-def editar(codigo, lojas_conveniadas):
+def editar(codigo, oficina):
     #Montando comando SQL
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL +="cnpj = '"+str(lojas_conveniadas.cnpj)+"'," \
-                "razao_social = '"+str(lojas_conveniadas.razao_social)+"'," \
-                "IE = '"+str(lojas_conveniadas.IE)+"'," \
-                "pais = '"+str(lojas_conveniadas.pais)+"'," \
-                "estado = '"+str(lojas_conveniadas.estado)+"'," \
-                "cidade = '"+str(lojas_conveniadas.cidade)+"'," \
-                "bairro = '"+str(lojas_conveniadas.bairro)+"'," \
-                "logradouro = '"+str(lojas_conveniadas.logradouro)+"'"
+    comandoSQL +="codigoChefe = '"+str(oficina.cnpj)+"'," \
+                "razao_social = '"+str(oficina.razao_social)+"'," \
+                "cnpj = '"+str(oficina.IE)+"'," \
+                "IE = '"+str(oficina.IE)+"'," \
+                "pais = '"+str(oficina.pais)+"'," \
+                "estado = '"+str(oficina.estado)+"'," \
+                "cidade = '"+str(oficina.cidade)+"'," \
+                "bairro = '"+str(oficina.bairro)+"'," \
+                "logradouro = '"+str(oficina.logradouro)+"'"
     comandoSQL += " where codigo='"+str(codigo)+"';"
 
     #Executando comando no banco de dados
@@ -79,7 +83,7 @@ def editar(codigo, lojas_conveniadas):
     cursor.execute(comandoSQL)
     db.commit()
     cursor.close()
-    return lojas_conveniadas
+    return oficina
 
 def getAll():
     comandoSQL = "SELECT * FROM "+nome_tabela+";"
@@ -90,7 +94,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(loja_conveniada.Lojas_Conveniadas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5], cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8]))
+        lista.append(oficina.Oficina(codigo=data_manager[0], codigoChefe=data_manager[1], razao_social=data_manager[2], cnpj=data_manager[3], IE=data_manager[4], pais=data_manager[5], estado=data_manager[6], cidade=data_manager[7], bairro=data_manager[8], logradouro=data_manager[9]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -101,7 +105,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return loja_conveniada.Lojas_Conveniadas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5], cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8])
+        return oficina.Oficina(codigo=data_manager[0], codigoChefe=data_manager[1], razao_social=data_manager[2], cnpj=data_manager[3], IE=data_manager[4], pais=data_manager[5], estado=data_manager[6], cidade=data_manager[7], bairro=data_manager[8], logradouro=data_manager[9])
     else:
         return None
 
@@ -111,6 +115,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return loja_conveniada.Lojas_Conveniadas(codigo=data_manager[0], cnpj=data_manager[1], razao_social=data_manager[2], IE=data_manager[3], pais=data_manager[4], estado=data_manager[5], cidade=data_manager[6], bairro=data_manager[7], logradouro=data_manager[8])
+        return oficina.Oficina(codigo=data_manager[0], codigoChefe=data_manager[1], razao_social=data_manager[2], cnpj=data_manager[3], IE=data_manager[4], pais=data_manager[5], estado=data_manager[6], cidade=data_manager[7], bairro=data_manager[8], logradouro=data_manager[9])
     else:
         return None

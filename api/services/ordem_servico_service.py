@@ -9,11 +9,11 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "entrada varchar(10)," \
-                "saida varchar(10)," \
-                "total varchar(15)," \
-                "codigoMecanico INTEGER references mecanicos(codigo) UNIQUE,"\
-                "codigoVeiculos INTEGER references veiculos(codigo) UNIQUE"
+                  "codigoMecanico INTEGER references mecanicos(codigo) UNIQUE," \
+                  "codigoVeiculos INTEGER references veiculos(codigo) UNIQUE" \
+                  "entrada varchar(10)," \
+                  "saida varchar(10)," \
+                  "total varchar(15)"
     comandoSQL += ");"
 
 
@@ -48,16 +48,16 @@ def cadastrar(ordem_servicos):
 
     return ordem_servicos
 
-def editar(codigo, veiculos):
+def editar(codigo, ordem_servico):
     #Montando comando SQL
     comandoSQL = "UPDATE "
     comandoSQL += nome_tabela
     comandoSQL += " SET "
-    comandoSQL += "entrada = '"+ str(ordem_servico.entrada) +"', " \
-                "codigoChefe = '"+str(ordem_servico.codigoMecanico)+"'," \
-                "codigoChefe = '" + str(ordem_servico.codigoVeiculo) + "'," \
-                "placa = '" + str(ordem_servico.saida) + "'," \
-                "modelo = '"+str(ordem_servico.total)+"'"
+    comandoSQL += "codigoMecanico = '"+ str(ordem_servico.codigoMecanico) +"', " \
+                "codigoVeiculo = '"+str(ordem_servico.codigoVeiculo)+"'," \
+                "entrada = '" + str(ordem_servico.entrada) + "'," \
+                "saida = '" + str(ordem_servico.saida) + "'," \
+                "total = '"+str(ordem_servico.total)+"'"
     comandoSQL += " where codigo='"+str(codigo)+"';"
 
     #Executando comando no banco de dados
@@ -76,7 +76,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(ordem_servico.ordem_servico(codigo=data_manager[0], codigoMecanico=data_manager[1], codigoVeiculo=data_manager[2], entrada=data_manager[3], saida=data_manager[4], total=data_manager[5]))
+        lista.append(ordem_servico.Ordem_servico(codigo=data_manager[0], codigoMecanico=data_manager[1], codigoVeiculo=data_manager[2], entrada=data_manager[3], saida=data_manager[4], total=data_manager[5]))
         data_manager = cursor.fetchone()
 
     return lista
@@ -87,7 +87,7 @@ def get(id):
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return ordem_servico.ordem_servico(codigo=data_manager[0], codigoMecanico=data_manager[1], codigoVeiculo=data_manager[2], entrada=data_manager[3], saida=data_manager[4], total=data_manager[5])
+        return ordem_servico.Ordem_servico(codigo=data_manager[0], codigoMecanico=data_manager[1], codigoVeiculo=data_manager[2], entrada=data_manager[3], saida=data_manager[4], total=data_manager[5])
     else:
         return None
 
@@ -97,6 +97,6 @@ def get_ultimo():
     cursor.execute(comandoSQL)
     data_manager = cursor.fetchone()
     if data_manager:
-        return ordem_servico.ordem_servico(codigo=data_manager[0], codigoMecanico=data_manager[1], codigoVeiculo=data_manager[2], entrada=data_manager[3], saida=data_manager[4], total=data_manager[5])
+        return ordem_servico.Ordem_servico(codigo=data_manager[0], codigoMecanico=data_manager[1], codigoVeiculo=data_manager[2], entrada=data_manager[3], saida=data_manager[4], total=data_manager[5])
     else:
         return None

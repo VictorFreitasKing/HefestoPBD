@@ -1,5 +1,5 @@
 class Loja_Conveniada():
-    def __init__(self, razao_social, cnpj, IE, pais, estado, cidade, bairro, logradouro, codigo=0):
+    def __init__(self, razao_social, cnpj, IE, pais, estado, cidade, bairro, logradouro, inicio_vigencia, fim_vigencia, codigo=0):
         self.__codigo = codigo
         self.__razao_social = razao_social
         self.__cnpj = cnpj
@@ -9,6 +9,8 @@ class Loja_Conveniada():
         self.__cidade = cidade
         self.__bairro = bairro
         self.__logradouro = logradouro
+        self.__inicio_vigencia = inicio_vigencia
+        self.__fim_vigencia = fim_vigencia
 
     @property
     def codigo(self):
@@ -74,6 +76,22 @@ class Loja_Conveniada():
     def logradouro(self, logradouro):
         self.__logradouro = logradouro
 
+    @property
+    def inicio_vigencia (self):
+        return self.__inicio_vigencia
+
+    @inicio_vigencia.setter
+    def inicio_vigencia(self, inicio_vigencia):
+        self.__inicio_vigencia = inicio_vigencia
+
+    @property
+    def fim_vigencia(self):
+        return self.__fim_vigencia
+
+    @fim_vigencia.setter
+    def fim_vigencia(self, fim_vigencia):
+        self.__fim_vigencia = fim_vigencia
+
     def toJson(self):
         return dict(
             codigo = self.__codigo,
@@ -84,5 +102,7 @@ class Loja_Conveniada():
             estado = self.__estado,
             cidade = self.__cidade,
             bairro = self.__bairro ,
-            logradouro = self.__logradouro
+            logradouro = self.__logradouro,
+            inicio_vigencia = self.__inicio_vigencia,
+            fim_vigencia = self.__fim_vigencia
         )
