@@ -1,7 +1,7 @@
 from ..entidades import solicitacao_reboque
 from ..database import db
 
-nome_tabela = "solicitacao_reboque"
+nome_tabela = "solicitacoes_reboque"
 
 def criar_tabela():
     #Montando comando SQL
