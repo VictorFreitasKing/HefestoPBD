@@ -1,5 +1,5 @@
 class Funcionario():
-    def __init__(self, nome, cpf, rg, telefone, celular, pais, estado, cidade, bairro, logradouro, data_admissao, data_demissao, salario, senha,  matricula=0):
+    def __init__(self, nome, cpf, rg, telefone, celular, pais, estado, cidade, bairro, logradouro, data_admissao, data_demissao, salario, senha, urlImagem, matricula=0):
         self.__matricula = matricula
         self.__nome = nome
         self.__cpf = cpf
@@ -15,6 +15,7 @@ class Funcionario():
         self.__data_demissao = data_demissao
         self.__salario = salario
         self.__senha = senha
+        self.__urlImagem = urlImagem
 
     @property
     def matricula(self):
@@ -124,6 +125,14 @@ class Funcionario():
     def senha(self, senha):
         self.__senha = senha
 
+    @property
+    def urlImagem(self):
+        return self.__urlImagem
+
+    @urlImagem.setter
+    def urlImage(self, urlImagem):
+        self.__urlImagem = urlImagem
+
     def toJson(self):
         return dict(
             matricula = self.__matricula,
@@ -140,5 +149,6 @@ class Funcionario():
             data_admissao = self.__data_admissao,
             data_demissao = self.__data_demissao,
             salario = self.__salario,
-            senha = self.__senha
+            senha = self.__senha,
+            urlImagem = self.urlImagem
         )
