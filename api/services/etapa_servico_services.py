@@ -64,7 +64,7 @@ def getAll():
     if data_manager is None:
         return None
     while data_manager is not None:
-        lista.append(etapa_servico.Etapa_Servico(codigo=data_manager[0], codigoServico=data_manager[1], descricao=data_manager[2], ordem=data_manager[3])
+        lista.append(etapa_servico.Etapa_Servico(codigo=data_manager[0], codigoServico=data_manager[1], descricao=data_manager[2], ordem=data_manager[3]))
         data_manager = cursor.fetchone()
 
     return lista

@@ -9,10 +9,10 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                  "codigoOS INTEGER references ordem_servico(codigo) UNIQUE," \
+                  "codigoOS INTEGER references ordens_servico(codigo) UNIQUE," \
                   "codigoFaturista INTEGER references faturistas(codigo) UNIQUE," \
                   "data_emissao Date," \
-                  "total REAL,"
+                  "total REAL"
     comandoSQL += ");"
 
 

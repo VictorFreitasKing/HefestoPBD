@@ -1,7 +1,7 @@
 from ..entidades import ordem_servico
 from ..database import db
 
-nome_tabela = "ordem_servicos"
+nome_tabela = "ordens_servico"
 
 def criar_tabela():
     #Montando comando SQL
@@ -10,7 +10,7 @@ def criar_tabela():
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
                   "codigoMecanico INTEGER references mecanicos(codigo) UNIQUE," \
-                  "codigoVeiculos INTEGER references veiculos(codigo) UNIQUE" \
+                  "codigoVeiculos INTEGER references veiculos(codigo) UNIQUE," \
                   "entrada varchar(10)," \
                   "saida varchar(10)," \
                   "total varchar(15)"

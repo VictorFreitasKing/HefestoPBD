@@ -8,7 +8,8 @@ def criar_tabela():
     comandoSQL = "CREATE TABLE IF NOT EXISTS "
     comandoSQL += nome_tabela
     comandoSQL += "("
-    comandoSQL += "codigo_loja_conveniada INTEGER primary key UNIQUE references lojas_conveniadas(codigo)," \
+    comandoSQL += "codigo serial primary key UNIQUE," \
+                  "codigo_loja_conveniada INTEGER references lojas_conveniadas(codigo)," \
                   "numero varchar(9)," \
                   "serie varchar(3)," \
                   "codigoAuxiliarFaturista INTEGER references auxiliares_de_faturistas(codigo)," \
