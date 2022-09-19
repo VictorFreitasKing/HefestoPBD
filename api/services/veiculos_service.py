@@ -1,5 +1,5 @@
-from ..entidades import veiculo
-from ..database import db
+from api.entidades import veiculo
+from api.database import db
 
 nome_tabela = "veiculos"
 
@@ -9,7 +9,7 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "codigoCliente INTEGER references clientes(codigo) UNIQUE," \
+                "codigoCliente INTEGER references clientes(codigo)," \
                 "placa varchar(11)," \
                 "marca varchar(11)," \
                 "modelo varchar(15)"
@@ -26,12 +26,12 @@ def cadastrar(veiculo):
     comandoSQL = "insert into "
     comandoSQL += nome_tabela
     comandoSQL += "("
-    comandoSQL += "codigoChefe," \
+    comandoSQL += "codigoCliente," \
                 "placa," \
                 "marca," \
                 "modelo" 
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(veiculo.codigoChefe)+"'," \
+    comandoSQL += "'"+str(veiculo.codigoCliente)+"'," \
                 "'" + str(veiculo.placa) + "'," \
                 "'" + str(veiculo.marca) + "'," \
                 "'"+str(veiculo.modelo)+"'"
@@ -51,7 +51,7 @@ def editar(codigo, veiculo):
     comandoSQL += nome_tabela
     comandoSQL += " SET "
     comandoSQL += "marca = '"+ str(veiculo.marca) +"', " \
-                "codigoChefe = '"+str(veiculo.codigoChefe)+"'," \
+                "codigoCliente = '"+str(veiculo.codigoChefe)+"'," \
                 "placa = '" + str(veiculo.placa) + "'," \
                 "modelo = '"+str(veiculo.modelo)+"'"
     comandoSQL += " where codigo='"+str(codigo)+"';"

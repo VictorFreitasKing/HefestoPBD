@@ -1,7 +1,7 @@
 class Nota_Fiscal():
-    def __init__(self, codigoLojaConveniada, numero, serie, codigoAuxiliarFaturista, codigoOS, total, codigo = 0):
+    def __init__(self, codigo_loja_conveniada, numero, serie, codigoAuxiliarFaturista, codigoOS, total, codigo = 0):
         self.__codigo = codigo
-        self.__codigoLojaConveniada = codigoLojaConveniada
+        self.__codigo_loja_conveniada = codigo_loja_conveniada
         self.__numero = numero
         self.__serie = serie
         self.__codigoAuxiliarFaturista = codigoAuxiliarFaturista
@@ -13,8 +13,12 @@ class Nota_Fiscal():
         return self.__codigo
 
     @property
-    def codigoLojaConveniada(self):
-        return self.__codigoLojaConveniada
+    def codigo_loja_conveniada(self):
+        return self.__codigo_loja_conveniada
+
+    @codigo_loja_conveniada.setter
+    def codigo_loja_conveniada(self, codigo):
+        self.__codigo_loja_conveniada = codigo
 
     @property
     def numero(self):
@@ -51,7 +55,7 @@ class Nota_Fiscal():
     def toJson(self):
         return dict(
             codigo = self.__codigo,
-            codigoLojaConveniada = self.__codigoLojaConveniada,
+            codigo_loja_conveniada = self.__codigoLojaConveniada,
             numero = self.__numero,
             serie = self.__serie,
             codigoAuxiliarFaturista = self.__codigoAuxiliarFaturista,

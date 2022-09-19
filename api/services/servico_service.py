@@ -1,5 +1,5 @@
-from ..entidades import servico
-from ..database import db
+from api.entidades import servico
+from api.database import db
 
 nome_tabela = "servicos"
 

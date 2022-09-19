@@ -8,8 +8,8 @@ def Popular():
             nome="Victor",
             cpf="11111111111",
             rg="1111111",
-            telefone="879999999999",
-            celular="879999999999",
+            telefone="87999999999",
+            celular="87999999999",
             pais="Brasil",
             estado="PE",
             cidade="Custodia",
@@ -19,7 +19,7 @@ def Popular():
             data_demissao="",
             salario=2500,
             senha="lorenipsu",
-            urlImagem=""
+            urlImagem="a"
         )
     )
 
@@ -28,8 +28,8 @@ def Popular():
             nome="Helen",
             cpf="11111111112",
             rg="1111112",
-            telefone="879999999999",
-            celular="879999999999",
+            telefone="87999999999",
+            celular="87999999999",
             pais="Brasil",
             estado="PE",
             cidade="Afogados",
@@ -48,8 +48,8 @@ def Popular():
             nome="Victor",
             cpf="11111111113",
             rg="1111113",
-            telefone="879999999999",
-            celular="879999999999",
+            telefone="87999999999",
+            celular="87999999999",
             pais="Brasil",
             estado="PE",
             cidade="Afogados",
@@ -68,8 +68,8 @@ def Popular():
             nome="Victor",
             cpf="11111111113",
             rg="1111113",
-            telefone="879999999999",
-            celular="879999999999",
+            telefone="87999999999",
+            celular="87999999999",
             pais="Brasil",
             estado="PE",
             cidade="Afogados",
@@ -84,8 +84,8 @@ def Popular():
             nome="Marcos",
             cpf="11111111114",
             rg="1111114",
-            telefone="879999999999",
-            celular="879999999999",
+            telefone="87999999999",
+            celular="87999999999",
             pais="Brasil",
             estado="PE",
             cidade="Serra Talhada",
@@ -151,7 +151,7 @@ def Popular():
             bairro="Centro",
             logradouro="Rua A",
             inicio_vigencia="01/01/2000",
-            fim_vigencia=""
+            fim_vigencia="01/01/2022"
         )
     )
 
@@ -167,6 +167,24 @@ def Popular():
             placa="PGF001",
             marca="FIAT",
             modelo="UNO 2015"
+        )
+    )
+
+    veiculos_service.cadastrar(
+        veiculo=veiculo.Veiculo(
+            codigoCliente=1,
+            placa="PGF001",
+            marca="FIAT",
+            modelo="UNO 2017"
+        )
+    )
+
+    veiculos_service.cadastrar(
+        veiculo=veiculo.Veiculo(
+            codigoCliente=1,
+            placa="PGF002",
+            marca="Volkswagen",
+            modelo="GOL"
         )
     )
 
@@ -189,7 +207,7 @@ def Popular():
             codigoServico=1,
             preco=30,
             inicio="01/01/2022",
-            fim=""
+            fim="31/12/2022"
         )
     )
 
@@ -223,7 +241,7 @@ def Popular():
 
     nota_fiscal_service.cadastrar(
         nota_fiscal=nota_fiscal.Nota_Fiscal(
-            codigoLojaConveniada=1,
+            codigo_loja_conveniada=1,
             numero=1,
             serie=1,
             codigoAuxiliarFaturista=1,

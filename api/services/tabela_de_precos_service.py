@@ -1,5 +1,5 @@
-from ..entidades import tabela_de_precos
-from ..database import db
+from api.entidades import tabela_de_precos
+from api.database import db
 
 nome_tabela = "tabelas_de_preco"
 
@@ -9,7 +9,7 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                "codigoServico INTEGER references servicos(codigo) UNIQUE," \
+                "codigoServico INTEGER references servicos(codigo)," \
                 "preco REAL," \
                 "inicio Date," \
                 "fim Date"

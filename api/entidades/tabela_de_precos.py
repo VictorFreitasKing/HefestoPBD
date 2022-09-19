@@ -11,7 +11,7 @@ class Tabela_de_preco():
         return self.__codigo
 
     @property
-    def codigoChefe(self):
+    def codigoServico(self):
         return self.__codigoServico
 
     @property

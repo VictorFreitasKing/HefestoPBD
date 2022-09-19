@@ -1,5 +1,5 @@
-from ..entidades import produto
-from ..database import db
+from api.entidades import produto
+from api.database import db
 
 nome_tabela = "produtos"
 
@@ -25,7 +25,7 @@ def cadastrar(produto):
     comandoSQL += "("
     comandoSQL += "descricao"
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(produto.descricao)+"',"
+    comandoSQL += "'"+str(produto.descricao)+"'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados

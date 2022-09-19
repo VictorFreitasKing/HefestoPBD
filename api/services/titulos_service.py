@@ -1,5 +1,5 @@
-from ..entidades import titulo
-from ..database import db
+from api.entidades import titulo
+from api.database import db
 
 nome_tabela = "titulos"
 
@@ -9,8 +9,8 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                  "codigoNFS INTEGER references notas_fiscais_servico(codigo) UNIQUE," \
-                  "codigoRecepcionista INTEGER references recepcionistas(codigo) UNIQUE," \
+                  "codigoNFS INTEGER references notas_fiscais_servico(codigo)," \
+                  "codigoRecepcionista INTEGER references recepcionistas(codigo)," \
                   "valor REAL," \
                   "vencimento Date," \
                   "data_baixa Date"

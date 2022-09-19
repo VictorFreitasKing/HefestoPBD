@@ -1,5 +1,5 @@
-from ..entidades import solicitacao_reboque
-from ..database import db
+from api.entidades import solicitacao_reboque
+from api.database import db
 
 nome_tabela = "solicitacoes_reboque"
 
@@ -9,7 +9,7 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                  "codigoCliente INTEGER references clientes(codigo) UNIQUE," \
+                  "codigoCliente INTEGER references clientes(codigo)," \
                   "latitude varchar(11)," \
                   "longitude varchar(11)"
     comandoSQL += ");"
@@ -27,7 +27,7 @@ def cadastrar(solicitacao_reboque):
     comandoSQL += "("
     comandoSQL += "codigoCliente," \
                   "latitude," \
-                  "longetude,"
+                  "longitude"
     comandoSQL +=") values ("
     comandoSQL += "'"+str(solicitacao_reboque.codigoCliente)+"'," \
                 "'" + str(solicitacao_reboque.latitude) + "'," \

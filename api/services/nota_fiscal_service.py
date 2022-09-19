@@ -1,5 +1,5 @@
-from ..entidades import nota_fiscal
-from ..database import db
+from api.entidades import nota_fiscal
+from api.database import db
 
 nome_tabela = "notas_fiscais"
 

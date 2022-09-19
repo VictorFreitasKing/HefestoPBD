@@ -1,5 +1,5 @@
-from ..entidades import item_OS
-from ..database import db
+from api.entidades import item_OS
+from api.database import db
 
 nome_tabela = "items_OS"
 
@@ -9,9 +9,9 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                  "codigoOS INTEGER references ordens_servico(codigo) UNIQUE," \
-                  "codigoServico INTEGER references servicos(codigo) UNIQUE," \
-                  "codigoMecanico INTEGER references mecanicos(codigo) UNIQUE," \
+                  "codigoOS INTEGER references ordens_servico(codigo)," \
+                  "codigoServico INTEGER references servicos(codigo)," \
+                  "codigoMecanico INTEGER references mecanicos(codigo)," \
                   "preco REAL," \
                   "status varchar(8)"
     comandoSQL += ");"

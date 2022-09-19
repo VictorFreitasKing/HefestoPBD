@@ -1,5 +1,5 @@
-from ..entidades import recepcionista
-from ..database import db
+from api.entidades import recepcionista
+from api.database import db
 
 nome_tabela = "recepcionistas"
 
@@ -25,7 +25,7 @@ def cadastrar(recepcionista):
     comandoSQL += "("
     comandoSQL += "matriculaFuncionario" 
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(recepcionista.matriculaFuncionario)+"',"
+    comandoSQL += "'"+str(recepcionista.matriculaFuncionario)+"'"
     comandoSQL += ");"
 
     #Executando comando no banco de dados
@@ -34,7 +34,7 @@ def cadastrar(recepcionista):
     db.commit()
     cursor.close()
 
-    return Recepcionistas
+    return recepcionista
 
 def getAll():
     comandoSQL = "SELECT * FROM "+nome_tabela+";"

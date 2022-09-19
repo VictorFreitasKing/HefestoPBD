@@ -1,5 +1,5 @@
-from ..entidades import faturista
-from ..database import db
+from api.entidades import faturista
+from api.database import db
 
 nome_tabela = "faturistas"
 

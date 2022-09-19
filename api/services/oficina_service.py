@@ -1,5 +1,5 @@
-from ..entidades import oficina
-from ..database import db
+from api.entidades import oficina
+from api.database import db
 
 nome_tabela = "oficinas"
 
@@ -10,7 +10,7 @@ def criar_tabela():
     comandoSQL += "("
 #  eeee eu n sei se ta certo a parte do codigoChefe 
     comandoSQL += "codigo serial primary key," \
-                "codigoChefe INTEGER references chefes(codigo) UNIQUE," \
+                "codigoChefe INTEGER references chefes(codigo)," \
                 "razao_social varchar(30)," \
                 "cnpj varchar(14) UNIQUE," \
                 "IE varchar(11)," \
@@ -33,7 +33,7 @@ def cadastrar(oficina):
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigoChefe," \
-                "razao_social" \
+                "razao_social," \
                 "cnpj," \
                 "IE," \
                 "pais," \

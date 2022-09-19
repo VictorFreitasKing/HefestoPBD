@@ -1,5 +1,5 @@
-from ..entidades import nota_fiscal_servico
-from ..database import db
+from api.entidades import nota_fiscal_servico
+from api.database import db
 
 nome_tabela = "notas_fiscais_servico"
 
@@ -9,8 +9,8 @@ def criar_tabela():
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "codigo serial primary key," \
-                  "codigoOS INTEGER references ordens_servico(codigo) UNIQUE," \
-                  "codigoFaturista INTEGER references faturistas(codigo) UNIQUE," \
+                  "codigoOS INTEGER references ordens_servico(codigo)," \
+                  "codigoFaturista INTEGER references faturistas(codigo)," \
                   "data_emissao Date," \
                   "total REAL"
     comandoSQL += ");"

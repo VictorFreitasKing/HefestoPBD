@@ -1,5 +1,5 @@
-from ..entidades import item_NF
-from ..database import db
+from api.entidades import item_NF
+from api.database import db
 
 nome_tabela = "itens_NF"
 

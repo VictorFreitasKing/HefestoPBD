@@ -1,5 +1,5 @@
-from ..entidades import loja_conveniada
-from ..database import db
+from api.entidades import loja_conveniada
+from api.database import db
 
 nome_tabela = "lojas_conveniadas"
 

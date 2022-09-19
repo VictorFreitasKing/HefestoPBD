@@ -1,5 +1,5 @@
-from ..entidades import funcionario
-from ..database import db
+from api.entidades import funcionario
+from api.database import db
 
 nome_tabela = "funcionarios"
 
@@ -49,7 +49,6 @@ def cadastrar(funcionario):
                   "bairro," \
                   "logradouro," \
                   "data_admissao," \
-                  "data_demissao," \
                   "salario," \
                   "senha," \
                   "urlImagem"
@@ -65,7 +64,6 @@ def cadastrar(funcionario):
                   "'"+str(funcionario.bairro)+"'," \
                   "'"+str(funcionario.logradouro)+"'," \
                   "'"+str(funcionario.data_admissao)+"'," \
-                  "'"+str(funcionario.data_demissao)+"'," \
                   ""+str(funcionario.salario)+"," \
                   "'"+str(funcionario.senha)+"'," \
                   "'"+str(funcionario.urlImagem)+"'"
