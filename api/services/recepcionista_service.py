@@ -18,14 +18,14 @@ def criar_tabela():
     db.commit()
     cursor.close()
 
-def cadastrar(Recepcionistas):
+def cadastrar(recepcionista):
     #Montando comando SQL
     comandoSQL = "insert into "
     comandoSQL += nome_tabela
     comandoSQL += "("
     comandoSQL += "matriculaFuncionario" 
     comandoSQL +=") values ("
-    comandoSQL += "'"+str(Recepcionistas.matriculaFuncionario)+"',"
+    comandoSQL += "'"+str(recepcionista.matriculaFuncionario)+"',"
     comandoSQL += ");"
 
     #Executando comando no banco de dados

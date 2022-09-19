@@ -46,7 +46,7 @@ class Ordem_servico():
     def toJson(self):
         return dict(
             codigo = self.__codigo,
-            codigoChefe = self.__codigoMecanico,
+            codigoMecanico = self.__codigoMecanico,
             codigoVeiculo = self.__codigoVeiculo,
             entrada = self.__entrada,
             saida = self.__saida,
