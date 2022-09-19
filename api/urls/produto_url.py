@@ -10,7 +10,7 @@ def url_geral_produto():
     if (request.method == "GET"):
         return produto_view.produto_view().getAll()
     if (request.method == "POST"):
-        produtoTemp = produto.produto(
+        produtoTemp = produto.Produto(
             descricao=request.json["descricao"],
         )
 
@@ -22,7 +22,7 @@ def url_unico_produto(id):
     if request.method == 'GET':
         return produto_view.produto_view().get(id)
     if request.method == 'POST':
-        produtoTemp = produto.produto(
+        produtoTemp = produto.Produto(
             codigo=id,
             descricao=request.json["descricao"],
         )

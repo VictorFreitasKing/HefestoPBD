@@ -5,12 +5,12 @@ from api import app
 
 urls = Blueprint('item_OSs', __name__)
 
-@app.route('/api/item_OSs/', methods=['GET', 'POST'])
+@app.route('/api/itens_OS/', methods=['GET', 'POST'])
 def url_geral_item_OS():
     if (request.method == "GET"):
         return item_OS_view.item_OS_view().getAll()
     if (request.method == "POST"):
-        item_OSTemp = item_OS.item_OS(
+        item_OSTemp = item_OS.Item_OS(
             preco=request.json["preco"],
             status=request.json["status"]
         )
@@ -18,12 +18,12 @@ def url_geral_item_OS():
         return item_OS_view.item_OS_view().post(item_OSTemp)
 
 
-@app.route('/api/item_OSs/<int:id>/', methods=['GET', 'POST'])
+@app.route('/api/itens_OS/<int:id>/', methods=['GET', 'POST'])
 def url_unico_item_OS(id):
     if request.method == 'GET':
         return item_OS_view.item_OS_view().get(id)
     if request.method == 'POST':
-        item_OSTemp = item_OS.item_OS(
+        item_OSTemp = item_OS.Item_OS(
             codigo=id,
             preco=request.json["preco"],
             status=request.json["status"]

@@ -1,4 +1,4 @@
-from ..services import funcionario_service, cliente_service, mecanico_service, chefe_service, recepcionista_service, faturista_service, auxiliar_de_faturista_service, oficina_service, loja_conveniada_service, produto_service, veiculos_service, servico_service, tabela_de_precos_service, etapa_servico_services, ordem_servico_service, item_OS_service, solicitacao_reboque_service, nota_fiscal_service, item_NF_service, notas_fiscais_servico_service, titulos_service
+from ..services import funcionario_service, cliente_service, mecanico_service, chefe_service, recepcionista_service, faturista_service, auxiliar_de_faturista_service, oficina_service, loja_conveniada_service, produto_service, veiculos_service, servico_service, tabela_de_precos_service, etapa_servico_services, ordem_servico_service, item_OS_service, solicitacao_reboque_service, nota_fiscal_service, item_NF_service, nota_fiscal_servico_service, titulos_service
 
 funcionario_service.criar_tabela()
 cliente_service.criar_tabela()
@@ -19,5 +19,5 @@ item_OS_service.criar_tabela()
 solicitacao_reboque_service.criar_tabela()
 nota_fiscal_service.criar_tabela()
 item_NF_service.criar_tabela()
-notas_fiscais_servico_service.criar_tabela()
+nota_fiscal_servico_service.criar_tabela()
 titulos_service.criar_tabela()

@@ -1,16 +1,16 @@
-from ..entidades import veiculo
-from ..views import veiculos_view
+from ..entidades import ordem_servico
+from ..views import ordem_servico_view
 from flask import request, Blueprint, make_response
 from api import app
 
-urls = Blueprint('ordem_servicoss', __name__)
+urls = Blueprint('os', __name__)
 
 @app.route('/api/os/', methods=['GET', 'POST'])
 def url_geral_OS():
     if (request.method == "GET"):
-        return veiculos_view.veiculos_view().getAll()
+        return ordem_servico_view.ordem_servico_view.getAll()
     if (request.method == "POST"):
-        veiculosTemp = veiculo.veiculos(
+        osTemp = ordem_servico.Ordem_servico(
             placa=request.json["placa"],
             marca=request.json["marca"],
             modelo=request.json["modelo"]
