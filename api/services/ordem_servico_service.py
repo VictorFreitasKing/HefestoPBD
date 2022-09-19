@@ -11,8 +11,8 @@ def criar_tabela():
     comandoSQL += "codigo serial primary key," \
                   "codigoMecanico INTEGER references mecanicos(codigo)," \
                   "codigoVeiculo INTEGER references veiculos(codigo)," \
-                  "entrada varchar(10)," \
-                  "saida varchar(10)," \
+                  "entrada Date," \
+                  "saida Date," \
                   "total varchar(15)"
     comandoSQL += ");"
 
